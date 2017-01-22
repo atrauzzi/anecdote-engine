@@ -1,9 +1,10 @@
 #!/usr/bin/env node
-import * as Commander from 'commander';
+import Commander from "./Command";
 import {Options} from "./Options";
 import {Anecdote} from './Engine/Anecdote';
 
 
+Commander.parse(process.argv);
 const options = new Options(Commander);
 
 const engine = new Anecdote(

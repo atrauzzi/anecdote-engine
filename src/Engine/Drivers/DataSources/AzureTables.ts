@@ -1,7 +1,6 @@
 import {DataSource as BaseDataSource} from "../../DataSource";
 import {Author} from "../../../Domain/Author";
 import * as Azure from "azure";
-import * as Bluebird from "bluebird";
 
 
 export class DataSource implements BaseDataSource {
@@ -18,10 +17,10 @@ export class DataSource implements BaseDataSource {
 
     public async setup(): Promise<void> {
 
-        const createTableIfNotExists = Bluebird.promisify(this.connection.createTableIfNotExists);
-
-        await createTableIfNotExists("authors");
-        await createTableIfNotExists("posts");
+        return new Promise<void>((resolve) =>
+            this.connection.createTableIfNotExists("authors", {}, () => resolve()))
+        .then(() => new Promise<void>((resolve) =>
+            this.connection.createTableIfNotExists("posts", {}, () => resolve())));
     }
 
     public async addAuthor(): Promise<void> {

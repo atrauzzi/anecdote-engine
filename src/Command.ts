@@ -1,6 +1,4 @@
-#!/usr/bin/env node
 import * as Commander from 'commander';
-
 
 const manifest = require(__dirname + "/../package.json");
 
@@ -20,11 +18,6 @@ Commander
     .option("-a, --data <item>", "Author source", defaultDataSource)
     .option("-c, --sources <items>", "Source(s)", (val) => val.split(","), defaultSources)
     .option("-s, --targets <items>", "Target(s)", (val) => val.split(","), defaultTargets)
-    .command("setup", "Perform any initial setup and/or migrations required by configured drivers.")
-    .command("run", "Attempt batch operations.")
 ;
-
-Commander.parse(process.argv);
-if (!Commander.args.length) Commander.help();
 
 export default Commander;
