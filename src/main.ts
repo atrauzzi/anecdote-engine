@@ -1,38 +1,30 @@
 #!/usr/bin/env node
 import * as Commander from 'commander';
-import * as _ from 'lodash';
-import {Options} from "./Options";
-import {Source} from './Engine/Source';
-import {Target} from './Engine/Target';
-import { Anecdote } from './Engine/Anecdote';
 
 
 const manifest = require(__dirname + "/../package.json");
 
+const defaultDataSource = __dirname + "/Engine/Drivers/DataSources/AzureTables";
+
 const defaultSources = [
-    __dirname + "/Sources/Github",
-    __dirname + "/Sources/Twitter",
+    __dirname + "/Engine/Drivers/Sources/Github",
+    __dirname + "/Engine/Drivers/Sources/Twitter",
 ];
 
 const defaultTargets = [
-    __dirname + "/Targets/AzureTables",
+    __dirname + "/Engine/Drivers/Targets/AzureTables",
 ];
 
 Commander
     .version(manifest.version)
+    .option("-a, --data <item>", "Author source", defaultDataSource)
     .option("-c, --sources <items>", "Source(s)", (val) => val.split(","), defaultSources)
     .option("-s, --targets <items>", "Target(s)", (val) => val.split(","), defaultTargets)
+    .command("setup", "Perform any initial setup and/or migrations required by configured drivers.")
+    .command("run", "Attempt batch operations.")
 ;
 
 Commander.parse(process.argv);
-//if (!Commander.args.length) Commander.help();
+if (!Commander.args.length) Commander.help();
 
-// http://stackoverflow.com/questions/41785511/can-i-add-members-to-an-existing-type-in-typescript
-var options = new Options(Commander);
-
-const engine = new Anecdote(
-    options.createSources(), 
-    options.createTargets()
-);
-
-engine.run();
+export default Commander;

@@ -1,5 +1,6 @@
 import * as Commander from "commander";
 import {DriverStatic} from "./Engine/DriverStatic";
+import {DataSource} from "./Engine/DataSource";
 import {Source} from "./Engine/Source";
 import {Target} from "./Engine/Target";
 
@@ -7,9 +8,10 @@ import {Target} from "./Engine/Target";
 export class Options {
 
     constructor(
-        command: Commander.IExportedCommand,
+        command: {[key: string]: any},
+        private dataSource = command["data"],
         private sources = command["sources"],
-        private targets = command["targets"]
+        private targets = command["targets"],
     ) {
     }
 
@@ -19,6 +21,11 @@ export class Options {
 
     public createTargets() {
         return this.targets.map((name: string) => this.createTarget(name));
+    }
+
+    public createDataSource() {
+        const DataSourceType = this.create(this.dataSource).DataSource;
+        return new DataSourceType() as DataSource;
     }
 
     private createSource(sourceName: string) {
