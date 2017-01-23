@@ -23,9 +23,11 @@ export class DataSource implements BaseDataSource {
             this.connection.createTableIfNotExists("posts", {}, () => resolve())));
     }
 
-    public async addAuthor(): Promise<void> {
-        
-        return null;
+    public async addAuthor(author: Author): Promise<void> {
+
+        return new Promise<void>((resolve) => {
+            this.connection.insertOrMergeEntity("authors", author, {}, () => resolve());
+        });
     }
 
     public async loadAuthors(): Promise<Author[]> {
