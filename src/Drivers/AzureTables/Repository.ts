@@ -1,7 +1,7 @@
 import {Repository as BaseRepository} from "../../Engine/Repository";
 import {Author} from "../../Domain/Author";
 import * as Azure from "azure";
-import {AuthorFact} from "./Entity/Author";
+import {AuthorFact} from "./Entity/AuthorFact";
 
 
 export class Repository implements BaseRepository {
