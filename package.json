@@ -10,7 +10,8 @@
     "anecdote-setup": "./lib/anecdote-setup.js"
   },
   "scripts": {
-    "postinstall": "tsc"
+    "run": "node ./node_modules/ts-node/dist/bin.js src/Command/anecdote-run.ts",
+    "setup": "node ./node_modules/ts-node/dist/bin.js src/Command/anecdote-setup.ts"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
     "@types/lodash": "^4.14.50",
     "@types/node-fetch": "^1.6.7",
     "semantic-release": "^6.3.2",
+    "ts-node": "^2.0.0",
     "typescript": "^2.1.5"
   },
   "dependencies": {
