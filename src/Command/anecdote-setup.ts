@@ -10,8 +10,10 @@ const options = new Options(command);
 
 const engine = new Anecdote(
     options.createRepository(),
+    options.createQueues(),
     options.createSources(),
-    options.createTargets()
+    options.createTargets(),
+    options.config
 );
 
 engine.setup();

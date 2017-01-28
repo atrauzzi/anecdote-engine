@@ -1,14 +1,16 @@
 import {Author} from "./Author";
+import {PostType} from "./PostType";
 
 
 export class Post {
 
-    public constructor(
-        public id: string,
-        public author: Author,
-        public title: string,
-        public content: string,
-        public authored: Date,
-    ) {
-    }
+    public author: Author;
+
+    public title: string;
+
+    public content: string;
+
+    public authored: Date;
+
+    public type: PostType;
 }

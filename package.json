@@ -7,11 +7,14 @@
   "bin": {
     "anecdote": "./lib/anecdote.js",
     "anecdote-run": "./lib/anecdote-run.js",
-    "anecdote-setup": "./lib/anecdote-setup.js"
+    "anecdote-setup": "./lib/anecdote-setup.js",
+    "anecdote-add-author": "./lib/anecdote-add-author.js"
   },
   "scripts": {
-    "run": "node ./node_modules/ts-node/dist/bin.js src/Command/anecdote-run.ts",
-    "setup": "node ./node_modules/ts-node/dist/bin.js src/Command/anecdote-setup.ts"
+    "start": "node ./node_modules/ts-node/dist/bin.js src/Command/anecdote",
+    "setup": "node ./node_modules/ts-node/dist/bin.js src/Command/anecdote-setup",
+    "add-author": "node ./node_modules/ts-node/dist/bin.js src/Command/anecdote-add-author",
+    "lint": "node ./node_modules/tslint/bin/tslint src/**/*.ts"
   },
   "repository": {
     "type": "git",
@@ -24,16 +27,21 @@
   "devDependencies": {
     "@types/azure": "^0.9.18",
     "@types/commander": "^2.3.31",
+    "@types/dotenv": "^2.0.20",
     "@types/lodash": "^4.14.50",
     "@types/node-fetch": "^1.6.7",
     "semantic-release": "^6.3.2",
     "ts-node": "^2.0.0",
-    "typescript": "^2.1.5"
+    "tslint": "^4.4.1",
+    "typescript": "next"
   },
   "dependencies": {
     "azure": "^1.2.0-preview",
     "commander": "^2.9.0",
+    "dotenv": "^4.0.0",
+    "inversify": "^3.0.0",
     "lodash": "^4.17.4",
-    "node-fetch": "^1.6.3"
+    "node-fetch": "^1.6.3",
+    "protobufjs": "^6.6.2"
   }
 }

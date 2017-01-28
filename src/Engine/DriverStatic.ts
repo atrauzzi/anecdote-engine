@@ -2,7 +2,6 @@ import {Driver} from "./Driver";
 
 
 export interface DriverStatic {
-    
-    new(): Driver;
 
+    new(options: {[property: string]: any}): Driver;
 }

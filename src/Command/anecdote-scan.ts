@@ -11,7 +11,8 @@ const options = new Options(command);
 const engine = new Anecdote(
     options.createRepository(),
     options.createSources(),
-    options.createTargets()
+    options.createTargets(),
+    options.config
 );
 
-engine.run();
+engine.scan();

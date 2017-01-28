@@ -1,17 +1,13 @@
-import {Post} from "./Post";
+import {Source} from "./Source";
 
 
 export class Author {
-
-    public id: string;
 
     public firstName: string;
 
     public lastName: string;
 
-    public nativeIds: {[key: string]: string} = {};
-
-    public posts: Post[];
+    public sources: {[key: string]: Source} = {};
 
     public created: Date;
 }
