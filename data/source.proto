@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+
+message Source {
+
+    string nativeId = 1;
+
+    Timestamp lastChecked = 2;
+
+    string token = 3;
+}

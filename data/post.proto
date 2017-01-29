@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+
+message Post {
+
+    PostType postType = 1;
+
+    string title = 2;
+
+    Author author = 3;
+
+    Timestamp authored = 4;
+
+    string content = 5;
+}

@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+
+enum PostType {
+
+    BLOG = 1;
+
+    MICROBLOG = 2;
+
+    SOCIAL = 3;
+
+    COMMENT = 4;
+}

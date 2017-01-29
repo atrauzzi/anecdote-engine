@@ -39,11 +39,13 @@ export class Anecdote {
 
         const authors = await this.repository.loadAuthors();
 
-        _.forEach(authors, (author) => {
+        authors.forEach((author) => {
 
+            this.queues.forEach((queue) => {
+
+                queue.dispatchScan(author);
+            });
         });
-
-        // Iterate over every source configured for each author and queue jobs to perform that source scan.
     }
 
     public async findSource(name: string) {
