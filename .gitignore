@@ -4,3 +4,4 @@ lib
 .vscode
 .idea
 .env
+protobuf_meta.ts

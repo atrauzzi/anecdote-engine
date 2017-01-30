@@ -5,9 +5,9 @@ export abstract class Fact<T> extends Base<T> {
 
     public PartitionKey: string;
 
-    public constructor(data: T) {
+    public constructor(type: string, data: T) {
 
-        super(data);
+        super(type, data);
 
         this.PartitionKey = "fact";
     }

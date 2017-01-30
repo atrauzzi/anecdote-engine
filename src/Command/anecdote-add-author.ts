@@ -2,7 +2,7 @@
 import {command, setting} from "./Base";
 import * as _ from "lodash";
 import {Options} from "../Engine/Options";
-import {Anecdote} from '../Engine/Anecdote';
+import {Anecdote} from "../Engine/Anecdote";
 import {Author} from "../Domain/Author";
 import {Source} from "../Domain/Source";
 

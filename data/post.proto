@@ -9,7 +9,7 @@ message Post {
 
     Author author = 3;
 
-    Timestamp authored = 4;
+    int32 authored = 4;
 
     string content = 5;
 }

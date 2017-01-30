@@ -9,5 +9,5 @@ message Author {
 
     map<string, Source> sources = 3;
 
-    Timestamp created = 4;
+    int32 created = 4;
 }

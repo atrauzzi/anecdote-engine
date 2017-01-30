@@ -3,7 +3,7 @@ import {Repository} from "./Repository";
 import {Source} from "./Source";
 import {Queue} from "./Queue";
 import {Target} from "./Target";
-import {Author} from "../Domain/Author";
+import * as Domain from "../Domain/index";
 
 
 export class Anecdote {
@@ -30,7 +30,7 @@ export class Anecdote {
         await this.targets.forEach((target) => target.setup());
     }
 
-    public async addAuthor(author: Author) {
+    public async addAuthor(author: Domain.Author) {
 
         await this.repository.addAuthor(author);
     }

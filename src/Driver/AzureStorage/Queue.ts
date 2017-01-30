@@ -1,14 +1,13 @@
 import {Queue as BaseQueue} from "../../Engine/Queue";
 import * as Azure from "azure";
-import {Source} from "../../Domain/Source";
-
+import {Author} from "../../Domain/Author";
 
 
 export class Queue implements BaseQueue {
 
     public name = "azure queues";
 
-    dispatchScan(source: Source): Promise<void> {
+    dispatchScan(author: Author): Promise<void> {
         return undefined;
     }
 

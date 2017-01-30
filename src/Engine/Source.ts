@@ -3,7 +3,6 @@ import {Post} from "../Domain/Post";
 
 
 export interface Source extends Driver {
-    
-    loadCurrentPosts(): Promise<Post[]>;
 
+    loadCurrentPosts(): Promise<Post[]>;
 }

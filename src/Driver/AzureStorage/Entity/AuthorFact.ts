@@ -8,7 +8,7 @@ export class AuthorFact extends Fact<Author> {
 
     public constructor(author: Author) {
 
-        super(author);
+        super("Author", author);
 
         this.RowKey = author.firstName + author.lastName;
     }

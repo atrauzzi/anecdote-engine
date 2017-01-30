@@ -37,7 +37,7 @@ export class Repository implements BaseRepository {
         var query = new Azure.TableQuery()
             .from("authors");
 
-        return this.queryEntities<Author>(query);
+        return this.queryEntities<Author[]>(query);
     }
 
     private async queryEntities<T>(query: Azure.TableQuery) {

@@ -1,3 +1,4 @@
+import "../App";
 import * as commander from "commander";
 import * as dotenv from "dotenv";
 import * as _ from "lodash";

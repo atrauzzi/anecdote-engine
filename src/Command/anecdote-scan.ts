@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-import {command} from './Base';
+import {command} from "./Base";
 import {Options} from "../Engine/Options";
-import {Anecdote} from '../Engine/Anecdote';
+import {Anecdote} from "../Engine/Anecdote";
 
 
 command.parse(process.argv);

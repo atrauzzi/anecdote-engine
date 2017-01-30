@@ -5,7 +5,7 @@ message Source {
 
     string nativeId = 1;
 
-    Timestamp lastChecked = 2;
+    int32 lastChecked = 2;
 
     string token = 3;
 }
