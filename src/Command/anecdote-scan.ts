@@ -16,4 +16,8 @@ const engine = new Anecdote(
     options.config
 );
 
-engine.scan();
+engine
+    .scan()
+    .catch((error) => {
+        throw error;
+    });

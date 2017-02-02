@@ -8,12 +8,14 @@
     "anecdote": "./lib/anecdote.js",
     "anecdote-run": "./lib/anecdote-run.js",
     "anecdote-setup": "./lib/anecdote-setup.js",
-    "anecdote-add-author": "./lib/anecdote-add-author.js"
+    "anecdote-add-author": "./lib/anecdote-add-author.js",
+    "anecdote-scan": "./lib/anecdote-scan.js"
   },
   "scripts": {
     "start": "node ./node_modules/ts-node/dist/bin.js src/Command/anecdote",
     "setup": "node ./node_modules/ts-node/dist/bin.js src/Command/anecdote-setup",
     "add-author": "node ./node_modules/ts-node/dist/bin.js src/Command/anecdote-add-author",
+    "scan": "node ./node_modules/ts-node/dist/bin.js src/Command/anecdote-scan",
     "generate-protobuf-meta": "node ./node_modules/protobufjs/bin/pbjs -t json-module -w es6 -o src/Domain/protobuf_meta.ts data/*",
     "lint": "node ./node_modules/tslint/bin/tslint src/**/*.ts",
     "pbjs": "node ./node_modules/protobufjs/bin/pbjs",
@@ -28,7 +30,6 @@
   },
   "homepage": "https://github.com/atrauzzi/anecdote-engine#readme",
   "devDependencies": {
-    "@types/azure": "^0.9.18",
     "@types/commander": "^2.3.31",
     "@types/dotenv": "^2.0.20",
     "@types/lodash": "^4.14.50",
@@ -36,10 +37,10 @@
     "semantic-release": "^6.3.2",
     "ts-node": "^2.0.0",
     "tslint": "^4.4.1",
-    "typescript": "next"
+    "typescript": "^2.0.0"
   },
   "dependencies": {
-    "azure": "^1.2.0-preview",
+    "azure-storage": "^2.0.0",
     "commander": "^2.9.0",
     "dotenv": "^4.0.0",
     "inversify": "^3.0.0",

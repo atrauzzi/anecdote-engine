@@ -15,6 +15,7 @@ export class Anecdote {
         protected targets: Target[],
         public config: {[key: string]: string}
     ) {
+
         console.log("Using data source:", this.repository.name);
         console.log("Using post sources:", this.sources.map((source) => source.name));
         console.log("Using queues:", this.queues.map((queue) => queue.name));
@@ -39,13 +40,13 @@ export class Anecdote {
 
         const authors = await this.repository.loadAuthors();
 
-        authors.forEach((author) => {
-
-            this.queues.forEach((queue) => {
-
-                queue.dispatchScan(author);
-            });
-        });
+        // authors.forEach((author) => {
+        //
+        //     this.queues.forEach((queue) => {
+        //
+        //         queue.dispatchScan(author);
+        //     });
+        // });
     }
 
     public async findSource(name: string) {
