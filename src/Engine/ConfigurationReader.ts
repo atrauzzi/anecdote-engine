@@ -18,27 +18,31 @@ export class ConfigurationReader {
         protected configuration: {[key: string]: any}
     ) {
 
+        inversify.decorate(inversify.injectable(), Configuration);
+
         this.container.bind<Configuration>(Types.Configuration)
             .toConstantValue(new Configuration(configuration["config"]));
-
-        inversify.decorate(inversify.injectable(), Configuration);
     }
 
     public bindAll() {
 
+        //
+        // Populate Type Metadata
         this.container.bind<Anecdote>(Types.Anecdote)
             .to(Anecdote);
 
+        inversify.decorate(inversify.injectable(), Anecdote);
+        inversify.decorate(inversify.inject(Types.Repository), Anecdote, 0);
+        inversify.decorate(inversify.multiInject(Types.Source), Anecdote, 1);
+        inversify.decorate(inversify.multiInject(Types.Queue), Anecdote, 2);
+        inversify.decorate(inversify.multiInject(Types.Target), Anecdote, 3);
+
+        //
+        // Bind Implementations
         this.bindRepository();
         this.bindSources();
         this.bindQueues();
         this.bindTargets();
-
-        inversify.decorate(inversify.injectable(), Anecdote);
-        inversify.decorate(inversify.inject(Types.Repository), Anecdote, 0);
-        inversify.decorate(inversify.inject(Types.Source), Anecdote, 1);
-        inversify.decorate(inversify.inject(Types.Queue), Anecdote, 2);
-        inversify.decorate(inversify.inject(Types.Target), Anecdote, 3);
     }
 
     public bindRepository() {
@@ -51,11 +55,11 @@ export class ConfigurationReader {
 
         this.configuration["sources"].map((source: string) => {
 
-            this.container.bind<Source>(Types.Source)
-                .to(this.create<Source>(source, "Source"));
-
             inversify.decorate(inversify.injectable(), source);
             inversify.decorate(inversify.inject(Types.Configuration), source, 0);
+
+            this.container.bind<Source>(Types.Source)
+                .to(this.create<Source>(source, "Source"));
         });
     }
 
@@ -63,11 +67,11 @@ export class ConfigurationReader {
 
         this.configuration["queues"].map((queue: string) => {
 
-            this.container.bind<Queue>(Types.Queue)
-                .to(this.create<Queue>(queue, "Queue"));
-
             inversify.decorate(inversify.injectable(), queue);
             inversify.decorate(inversify.inject(Types.Configuration), queue, 0);
+
+            this.container.bind<Queue>(Types.Queue)
+                .to(this.create<Queue>(queue, "Queue"));
         });
     }
 
@@ -75,11 +79,11 @@ export class ConfigurationReader {
 
         this.configuration["targets"].map((target: string) => {
 
-            this.container.bind<Target>(Types.Target)
-                .to(this.create<Target>(target, "Target"));
-
             inversify.decorate(inversify.injectable(), target);
             inversify.decorate(inversify.inject(Types.Configuration), target, 0);
+
+            this.container.bind<Target>(Types.Target)
+                .to(this.create<Target>(target, "Target"));
         });
     }
 
