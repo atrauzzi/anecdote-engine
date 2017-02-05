@@ -1,10 +1,12 @@
 #!/usr/bin/env node
-import {command, setting} from "./Base";
 import * as _ from "lodash";
-import {Options} from "../Engine/Options";
+import {ConfigurationReader} from "../Engine/ConfigurationReader";
+import {container} from "../Container";
+import {command, setting} from "./Base";
 import {Anecdote} from "../Engine/Anecdote";
 import {Author} from "../Domain/Author";
 import {Source} from "../Domain/Source";
+import {Types} from "../Engine/index";
 
 
 command
@@ -15,15 +17,12 @@ command
 
 command.parse(process.argv);
 
-const options = new Options(command);
+const configurationReader = new ConfigurationReader(container, command);
+configurationReader.bindAll();
 
-const engine = new Anecdote(
-    options.createRepository(),
-    options.createSources(),
-    options.createQueues(),
-    options.createTargets(),
-    options.config
-);
+
+// ToDo: Request instance of Anecdote from IoC.
+const anecdote = container.get<Anecdote>(Types.Anecdote);
 
 const author = new Author;
 author.firstName = command["firstName"];
@@ -37,4 +36,4 @@ author.sources = _.mapValues(command["authorSources"], (sourceData) => {
     return source;
 });
 
-engine.addAuthor(author);
+anecdote.addAuthor(author);

@@ -1,18 +1,18 @@
 #!/usr/bin/env node
 import {command} from "./Base";
-import {Options} from "../Engine/Options";
+import {ConfigurationReader} from "../Engine/ConfigurationReader";
 import {Anecdote} from "../Engine/Anecdote";
 
 
 command.parse(process.argv);
 
-const options = new Options(command);
+const options = new ConfigurationReader(command);
 
 const engine = new Anecdote(
-    options.createRepository(),
-    options.createQueues(),
-    options.createSources(),
-    options.createTargets(),
+    options.bindRepository(),
+    options.bindQueues(),
+    options.bindSources(),
+    options.bindTargets(),
     options.config
 );
 

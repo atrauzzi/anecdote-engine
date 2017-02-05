@@ -1,12 +1,19 @@
+import "reflect-metadata";
+import * as dotenv from "dotenv";
 import * as _ from "lodash";
 import * as protobuf from "protobufjs";
 import * as domainModels from "./Domain/index";
-import protobufMeta from "./Domain/protobuf_meta";
+import protobufMeta from "./Protobuf";
 
 
 //
-// Protocol Buffers
+// Environment
+export const manifest = require(__dirname + "/../package.json");
+export const environment = (dotenv.config() as any).parsed;
+export {container} from "./Container";
 
+//
+// Protocol Buffers
 _.forEach(domainModels, (domainModel, name) => {
 
     try {
@@ -16,10 +23,3 @@ _.forEach(domainModels, (domainModel, name) => {
         // ToDo: Enums cause exceptions.
     }
 });
-
-
-
-//
-// Dependency Injection
-
-// ToDo: If we added a dependency injector, this file is where it would be configured.

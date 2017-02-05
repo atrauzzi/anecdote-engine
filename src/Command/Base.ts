@@ -1,26 +1,26 @@
-import "../App";
 import * as commander from "commander";
-import * as dotenv from "dotenv";
 import * as _ from "lodash";
+import {manifest, environment} from "../App";
+import {Repository} from "../Driver/MongoDb/Repository";
+import {Source as GithubSource} from "../Driver/Github/Source";
+import {Source as TwitterSource} from "../Driver/Twitter/Source";
+import {Queue} from "../Driver/MongoDb/Queue";
+import {Target} from "../Driver/MongoDb/Target";
 
 
-const environment = (dotenv.config() as any).parsed;
-
-const manifest = require(__dirname + "/../../package.json");
-
-const defaultRepository = __dirname + "/../Driver/AzureStorage/Repository";
+const defaultRepository = Repository;
 
 const defaultSources = [
-    __dirname + "/../Driver/Github/Source",
-    __dirname + "/../Driver/Twitter/Source",
+    GithubSource,
+    TwitterSource,
 ];
 
 const defaultQueues = [
-    __dirname + "/../Driver/AzureStorage/Queue",
+    Queue,
 ];
 
 const defaultTargets = [
-    __dirname + "/../Driver/AzureStorage/Target",
+    Target,
 ];
 
 export function collect(valuePair: string, memo: {[key: string]: string}) {

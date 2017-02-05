@@ -12,24 +12,19 @@
         "removeComments": true,
         "noLib": false,
         "preserveConstEnums": true,
-        //"types": ["reflect-metadata"],
         "suppressImplicitAnyIndexErrors": true,
         "sourceMap": true,
         "outDir": "lib",
         "lib": [
-            "es5",
-            "dom",
-            "es2015.iterable",
-            "es2015.promise"
+            "es6"
         ]
     },
     "include": [
         "src/**/*"
     ],
     "exclude": [
-        "node_modules",
         "**/*.spec.ts",
-        "lib"
+        "lib/**/*"
     ],
     "compileOnSave": false,
     "buildOnSave": false,

@@ -12,15 +12,13 @@ export class Anecdote {
         protected repository: Repository,
         protected sources: Source[],
         protected queues: Queue[],
-        protected targets: Target[],
-        public config: {[key: string]: string}
+        protected targets: Target[]
     ) {
 
-        console.log("Using data source:", this.repository.name);
+        console.log("Using repository:", this.repository.name);
         console.log("Using post sources:", this.sources.map((source) => source.name));
         console.log("Using queues:", this.queues.map((queue) => queue.name));
         console.log("Using post targets:", this.targets.map((target) => target.name));
-        console.log("Using config:", this.config);
     }
 
     public async setup(): Promise<void> {

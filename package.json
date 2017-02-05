@@ -16,10 +16,11 @@
     "setup": "node ./node_modules/ts-node/dist/bin.js src/Command/anecdote-setup",
     "add-author": "node ./node_modules/ts-node/dist/bin.js src/Command/anecdote-add-author",
     "scan": "node ./node_modules/ts-node/dist/bin.js src/Command/anecdote-scan",
-    "generate-protobuf-meta": "node ./node_modules/protobufjs/bin/pbjs -t json-module -w es6 -o src/Domain/protobuf_meta.ts data/*",
+    "generate-protobuf-meta": "node ./node_modules/protobufjs/bin/pbjs -t json-module -w es6 -o src/Protobuf.ts data/*",
     "lint": "node ./node_modules/tslint/bin/tslint src/**/*.ts",
     "pbjs": "node ./node_modules/protobufjs/bin/pbjs",
-    "pbts": "node ./node_modules/protobufjs/bin/pbts"
+    "pbts": "node ./node_modules/protobufjs/bin/pbts",
+    "tsc": "node ./node_modules/typescript/bin/tsc"
   },
   "repository": {
     "type": "git",
@@ -33,6 +34,7 @@
     "@types/commander": "^2.3.31",
     "@types/dotenv": "^2.0.20",
     "@types/lodash": "^4.14.50",
+    "@types/mongodb": "^2.1.37",
     "@types/node-fetch": "^1.6.7",
     "semantic-release": "^6.3.2",
     "ts-node": "^2.0.0",
@@ -40,12 +42,14 @@
     "typescript": "^2.0.0"
   },
   "dependencies": {
-    "azure-storage": "^2.0.0",
+    "@types/node": "^7.0.4",
     "commander": "^2.9.0",
     "dotenv": "^4.0.0",
     "inversify": "^3.0.0",
     "lodash": "^4.17.4",
+    "mongodb": "^2.2.22",
     "node-fetch": "^1.6.3",
-    "protobufjs": "^6.6.2"
+    "protobufjs": "^6.6.2",
+    "reflect-metadata": "^0.1.9"
   }
 }
