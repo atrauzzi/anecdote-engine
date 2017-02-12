@@ -18,6 +18,7 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 RUN apt-get install -y nodejs
 
 RUN npm install -g yarn
+RUN npm install -g node-inspector
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 

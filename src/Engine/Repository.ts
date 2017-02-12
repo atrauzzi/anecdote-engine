@@ -6,5 +6,6 @@ export interface Repository extends Driver {
 
     addAuthor(author: Author): Promise<void>;
 
-    loadAuthors(): Promise<Author[]>;
+    // ToDo: When generators are fully landed in TS, switch!
+    authors(): Promise<Author[]>;
 }

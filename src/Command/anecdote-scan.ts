@@ -1,23 +1,19 @@
 #!/usr/bin/env node
 import {command} from "./Base";
 import {ConfigurationReader} from "../Engine/ConfigurationReader";
+import {container} from "../Container";
+import {Types} from "../Engine/index";
 import {Anecdote} from "../Engine/Anecdote";
 
 
 command.parse(process.argv);
 
-const options = new ConfigurationReader(command);
+const configurationReader = new ConfigurationReader(container, command);
+configurationReader.bindAll();
 
-const engine = new Anecdote(
-    options.bindRepository(),
-    options.bindSources(),
-    options.bindQueues(),
-    options.bindTargets(),
-    options.config
-);
+const anecdote = container.get<Anecdote>(Types.Anecdote);
 
-engine
+anecdote
     .scan()
-    .catch((error) => {
-        throw error;
-    });
+    .catch((error) => console.log(error))
+    .then(() => process.exit());

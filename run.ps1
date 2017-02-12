@@ -7,4 +7,5 @@ docker-compose run `
     --rm `
     --entrypoint=$entrypoint `
     --workdir=/app `
+    --service-ports `
     cli $remainingArgs

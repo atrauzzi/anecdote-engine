@@ -11,6 +11,7 @@ export class Queue implements QueueContract {
     }
 
     dispatchScan(author: Author): Promise<void> {
+
         return undefined;
     }
 

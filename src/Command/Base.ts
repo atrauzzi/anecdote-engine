@@ -46,7 +46,7 @@ export const split = (value: string) => value.split(",");
 
 commander
     .version(manifest.version)
-    .option("-r, --repository <item>", "Repository", defaultRepository)
+    .option("-r, --repository <item>", "Repository", _.identity, defaultRepository)
     .option("-c, --sources <items>", "Source(s)", split, defaultSources)
     .option("-q, --queues <items>", "Queue(s)", split, defaultQueues)
     .option("-s, --targets <items>", "Target(s)", split, defaultTargets)

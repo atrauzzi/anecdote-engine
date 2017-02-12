@@ -23,10 +23,14 @@ export class Anecdote {
 
     public async setup(): Promise<void> {
 
-        await this.repository.setup();
-        await this.sources.forEach((source) => source.setup());
-        await this.queues.forEach((queue) => queue.setup());
-        await this.targets.forEach((target) => target.setup());
+        const drivers = _.concat(
+            [this.repository],
+            this.sources,
+            this.queues,
+            this.targets,
+        );
+
+        await Promise.all(drivers.map((driver) => driver.setup()));
     }
 
     public async addAuthor(author: Domain.Author) {
@@ -36,15 +40,14 @@ export class Anecdote {
 
     public async scan() {
 
-        const authors = await this.repository.loadAuthors();
+        const authors = await this.repository.authors();
 
-        // authors.forEach((author) => {
-        //
-        //     this.queues.forEach((queue) => {
-        //
-        //         queue.dispatchScan(author);
-        //     });
-        // });
+        // ToDo: I'd love to know if there's a way to sugar this up!
+        // Note: "No" from lodash :(  - https://github.com/lodash/lodash/issues/1191
+        await Promise.all(
+            authors.map((author) =>
+                this.queues.map((queue) =>
+                    queue.dispatchScan(author))));
     }
 
     public async findSource(name: string) {

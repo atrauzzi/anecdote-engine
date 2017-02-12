@@ -35,6 +35,7 @@
     "@types/dotenv": "^2.0.20",
     "@types/lodash": "^4.14.50",
     "@types/mongodb": "^2.1.37",
+    "@types/node": "^7.0.4",
     "@types/node-fetch": "^1.6.7",
     "semantic-release": "^6.3.2",
     "ts-node": "^2.0.0",
@@ -42,7 +43,6 @@
     "typescript": "^2.0.0"
   },
   "dependencies": {
-    "@types/node": "^7.0.4",
     "commander": "^2.9.0",
     "dotenv": "^4.0.0",
     "inversify": "^3.0.0",

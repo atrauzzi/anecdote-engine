@@ -20,8 +20,6 @@ command.parse(process.argv);
 const configurationReader = new ConfigurationReader(container, command);
 configurationReader.bindAll();
 
-
-// ToDo: Request instance of Anecdote from IoC.
 const anecdote = container.get<Anecdote>(Types.Anecdote);
 
 const author = new Author;
@@ -36,4 +34,7 @@ author.sources = _.mapValues(command["authorSources"], (sourceData) => {
     return source;
 });
 
-anecdote.addAuthor(author);
+anecdote
+    .addAuthor(author)
+    .catch((error) => console.log(error))
+    .then(() => process.exit());

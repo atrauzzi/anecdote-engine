@@ -55,9 +55,6 @@ export class ConfigurationReader {
 
         this.configuration["sources"].map((source: string) => {
 
-            inversify.decorate(inversify.injectable(), source);
-            inversify.decorate(inversify.inject(Types.Configuration), source, 0);
-
             this.container.bind<Source>(Types.Source)
                 .to(this.create<Source>(source, "Source"));
         });
@@ -66,9 +63,6 @@ export class ConfigurationReader {
     public bindQueues() {
 
         this.configuration["queues"].map((queue: string) => {
-
-            inversify.decorate(inversify.injectable(), queue);
-            inversify.decorate(inversify.inject(Types.Configuration), queue, 0);
 
             this.container.bind<Queue>(Types.Queue)
                 .to(this.create<Queue>(queue, "Queue"));
@@ -79,9 +73,6 @@ export class ConfigurationReader {
 
         this.configuration["targets"].map((target: string) => {
 
-            inversify.decorate(inversify.injectable(), target);
-            inversify.decorate(inversify.inject(Types.Configuration), target, 0);
-
             this.container.bind<Target>(Types.Target)
                 .to(this.create<Target>(target, "Target"));
         });
@@ -91,8 +82,11 @@ export class ConfigurationReader {
 
         if(_.isString(driver)) {
 
-            return require(driver as string)[type] as DriverStatic<T>;
+            driver = require(driver as string)[type] as DriverStatic<T>;
         }
+
+        inversify.decorate(inversify.injectable(), driver);
+        inversify.decorate(inversify.inject(Types.Configuration), driver, 0);
 
         return driver as DriverStatic<T>;
     }
