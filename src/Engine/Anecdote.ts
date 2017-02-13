@@ -60,6 +60,11 @@ export class Anecdote {
         await Promise.all(queueings);
     }
 
+    public async work() {
+
+        await Promise.all(this.queues.map((queue) => queue.work(this)));
+    }
+
     public async findSource(name: string) {
 
         return _.find(this.sources, (source: Source) => source.name === name);

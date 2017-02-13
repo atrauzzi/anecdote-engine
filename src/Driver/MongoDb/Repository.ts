@@ -29,8 +29,11 @@ export class Repository implements RepositoryContract {
 
     public async close() {
 
-        await this.db.close();
-        this.db = null;
+        if(this.db) {
+
+            await this.db.close();
+            this.db = null;
+        }
     }
 
     public async addAuthor(author: Author): Promise<void> {

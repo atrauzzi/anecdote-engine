@@ -2,6 +2,7 @@ import {Queue as QueueContract} from "../../Engine/Queue";
 import {Configuration} from "../../Engine/Configuration";
 import {Author} from "../../Domain/Author";
 import * as amqp from "amqplib";
+import {Anecdote} from "../../Engine/Anecdote";
 
 
 export class Queue implements QueueContract {
@@ -14,7 +15,7 @@ export class Queue implements QueueContract {
 
     protected channel: amqp.Channel;
 
-    public constructor (options?: Configuration) {
+    public constructor(options?: Configuration) {
 
         this.connectionString = options.values["AMQP_CONNECTION_STRING"];
     }
@@ -34,10 +35,13 @@ export class Queue implements QueueContract {
 
     public async close() {
 
-        await this.channel.close();
-        this.channel = null;
-        await this.connection.close();
-        this.connection = null;
+        if(this.connection) {
+
+            await this.channel.close();
+            this.channel = null;
+            await this.connection.close();
+            this.connection = null;
+        }
     }
 
     public async dispatchScan(author: Author) {
@@ -47,9 +51,17 @@ export class Queue implements QueueContract {
         this.channel.sendToQueue("scan", new Buffer(JSON.stringify(author)));
     }
 
-    public handleScans(): Promise<void> {
+    public async work(anecdote: Anecdote) {
 
-        return undefined;
+        await this.connect();
+
+        await this.channel.consume("scan", (message) => this.handle(message));
+    }
+
+    protected async handle(message: amqp.Message) {
+
+        console.log(message.content.toString());
+        await this.channel.ack(message);
     }
 
     public async setup(): Promise<void> {

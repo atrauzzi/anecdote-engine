@@ -14,5 +14,5 @@ configurationReader.bindAll();
 const anecdote = container.get<Anecdote>(Types.Anecdote);
 
 anecdote.setup()
-    .catch((error) => console.log(error))
-    .then(() => anecdote.close());
+    .then(() => anecdote.close())
+    .catch((error) => console.log(error));

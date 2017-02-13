@@ -16,7 +16,7 @@
         "sourceMap": true,
         "outDir": "lib",
         "lib": [
-            "es2017"
+            "es6"
         ]
     },
     "include": [

@@ -16,6 +16,7 @@
     "setup": "node ./node_modules/ts-node/dist/bin.js src/Command/anecdote-setup",
     "add-author": "node ./node_modules/ts-node/dist/bin.js src/Command/anecdote-add-author",
     "scan": "node ./node_modules/ts-node/dist/bin.js src/Command/anecdote-scan",
+    "work": "node ./node_modules/ts-node/dist/bin.js src/Command/anecdote-work",
     "generate-protobuf-meta": "node ./node_modules/protobufjs/bin/pbjs -t json-module -w es6 -o src/Protobuf.ts data/*",
     "lint": "node ./node_modules/tslint/bin/tslint src/**/*.ts",
     "pbjs": "node ./node_modules/protobufjs/bin/pbjs",

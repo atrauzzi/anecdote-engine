@@ -36,5 +36,5 @@ author.sources = _.mapValues(command["authorSources"], (sourceData) => {
 
 anecdote
     .addAuthor(author)
-    .catch((error) => console.log(error))
-    .then(() => anecdote.close());
+    .then(() => anecdote.close())
+    .catch((error) => console.log(error));
