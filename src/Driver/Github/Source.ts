@@ -7,6 +7,12 @@ export class Source implements SourceContract {
     public name = "github";
 
     public setup(): Promise<void> {
+
+        return null;
+    }
+
+    public async close() {
+
         return null;
     }
 

@@ -13,7 +13,7 @@ configurationReader.bindAll();
 
 const anecdote = container.get<Anecdote>(Types.Anecdote);
 
-anecdote
-    .scan()
-    .catch((error) => console.log(error))
-    .then(() => process.exit());
+anecdote.scan()
+    .catch((error) => console.error(error))
+    .then(() => anecdote.close());
+

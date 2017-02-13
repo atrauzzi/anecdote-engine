@@ -6,7 +6,13 @@ export class Target implements TargetContract {
 
     name: string;
 
-    setup(): Promise<void> {
+    public async setup() {
+
         return undefined;
+    }
+
+    public async close() {
+
+        return null;
     }
 }

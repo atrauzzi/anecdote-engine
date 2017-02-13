@@ -15,4 +15,4 @@ const anecdote = container.get<Anecdote>(Types.Anecdote);
 
 anecdote.setup()
     .catch((error) => console.log(error))
-    .then(() => process.exit());
+    .then(() => anecdote.close());

@@ -6,5 +6,5 @@ export interface Queue extends Driver {
 
     dispatchScan(author: Author): Promise<void>;
 
-    handleScan(): Promise<void>;
+    handleScans(): Promise<void>;
 }

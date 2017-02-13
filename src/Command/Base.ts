@@ -4,7 +4,7 @@ import {manifest, environment} from "../App";
 import {Repository} from "../Driver/MongoDb/Repository";
 import {Source as GithubSource} from "../Driver/Github/Source";
 import {Source as TwitterSource} from "../Driver/Twitter/Source";
-import {Queue} from "../Driver/MongoDb/Queue";
+import {Queue} from "../Driver/Amqp/Queue";
 import {Target} from "../Driver/MongoDb/Target";
 
 

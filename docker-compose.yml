@@ -9,12 +9,21 @@ services:
     ports:
       - "27017:27017"
 
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    env_file: .env
+
+    ports:
+      - "8075:15672"
+
   cli:
     build: .
     container_name: anecdote-cli
 
     depends_on:
       - mongodb
+      - rabbitmq
 
     volumes:
       - "./:/app"

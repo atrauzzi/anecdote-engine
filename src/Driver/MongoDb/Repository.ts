@@ -21,30 +21,29 @@ export class Repository implements RepositoryContract {
 
         if(!this.db) {
 
+            process.on("exit", () => this.close());
+
+            // ToDo: `connect` doesn't resolve, I'm not sure as to why
             //noinspection TypeScriptUnresolvedFunction
             this.db = await MongoClient.connect(this.serverUri);
-
-            process.on("exit", () => this.close());
         }
     }
 
-    protected async close() {
+    public async close() {
 
-        console.log("Closing mongodb connection.");
+        console.log("closing");
+
         await this.db.close();
+        this.db = null;
     }
 
     public async addAuthor(author: Author): Promise<void> {
 
         await this.connect();
 
-        console.log(JSON.parse(JSON.stringify(author)));
-
         await this.db.collection("author")
             // ToDo: Need to open a ticket on the mongodb JIRA about this - https://jira.mongodb.org/browse/NODE
             .insertOne(JSON.parse(JSON.stringify(author)));
-
-        await this.close();
     }
 
     public async authors() {

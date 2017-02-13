@@ -8,6 +8,16 @@ import * as Domain from "../Domain/index";
 
 export class Anecdote {
 
+    public get drivers() {
+
+        return _.concat(
+            [this.repository],
+            this.sources,
+            this.queues,
+            this.targets,
+        );
+    }
+
     public constructor(
         protected repository: Repository,
         protected sources: Source[],
@@ -21,16 +31,14 @@ export class Anecdote {
         console.log("Using post targets:", this.targets.map((target) => target.name));
     }
 
-    public async setup(): Promise<void> {
+    public async setup() {
 
-        const drivers = _.concat(
-            [this.repository],
-            this.sources,
-            this.queues,
-            this.targets,
-        );
+        await Promise.all(this.drivers.map((driver) => driver.setup()));
+    }
 
-        await Promise.all(drivers.map((driver) => driver.setup()));
+    public async close() {
+
+        await Promise.all(this.drivers.map((driver) => driver.close()));
     }
 
     public async addAuthor(author: Domain.Author) {
@@ -42,12 +50,14 @@ export class Anecdote {
 
         const authors = await this.repository.authors();
 
-        // ToDo: I'd love to know if there's a way to sugar this up!
-        // Note: "No" from lodash :(  - https://github.com/lodash/lodash/issues/1191
-        await Promise.all(
+        const queueings = _.flattenDeep<Promise<void>>(
             authors.map((author) =>
                 this.queues.map((queue) =>
                     queue.dispatchScan(author))));
+
+        // ToDo: I'd love to know if there's a way to sugar this up!
+        // Note: "No" from lodash :(  - https://github.com/lodash/lodash/issues/1191
+        await Promise.all(queueings);
     }
 
     public async findSource(name: string) {
