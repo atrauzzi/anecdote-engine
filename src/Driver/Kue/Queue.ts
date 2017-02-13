@@ -38,7 +38,7 @@ export class Queue implements QueueContract {
         process.on("exit", () => this.close());
     }
 
-    protected close() {
+    public async close() {
 
         this.queue = null;
     }

@@ -23,8 +23,6 @@ export class Queue implements QueueContract {
 
         if(!this.connection) {
 
-            process.on("exit", () => this.close());
-
             this.connection = await amqp.connect(this.connectionString);
 
             const channel = await this.connection.createChannel();

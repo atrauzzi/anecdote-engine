@@ -21,8 +21,6 @@ export class Repository implements RepositoryContract {
 
         if(!this.db) {
 
-            process.on("exit", () => this.close());
-
             // ToDo: `connect` doesn't resolve, I'm not sure as to why
             //noinspection TypeScriptUnresolvedFunction
             this.db = await MongoClient.connect(this.serverUri);
@@ -30,8 +28,6 @@ export class Repository implements RepositoryContract {
     }
 
     public async close() {
-
-        console.log("closing");
 
         await this.db.close();
         this.db = null;
