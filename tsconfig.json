@@ -9,12 +9,15 @@
         "declaration": true,
         "noImplicitAny": true,
         "noImplicitUseStrict": false,
+        "allowSyntheticDefaultImports": true,
         "removeComments": true,
         "noLib": false,
         "preserveConstEnums": true,
         "suppressImplicitAnyIndexErrors": true,
         "sourceMap": true,
         "outDir": "lib",
+        "typeRoots": [],
+        "types": [],
         "lib": [
             "es6"
         ]
@@ -25,7 +28,7 @@
     "exclude": [
         "**/*.spec.ts",
         "lib/**/*",
-        "node_modules"
+        "node_modules/**/*"
     ],
     "compileOnSave": false,
     "buildOnSave": false,

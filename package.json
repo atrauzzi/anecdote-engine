@@ -35,7 +35,6 @@
     "@types/amqplib": "^0.5.1",
     "@types/commander": "^2.3.31",
     "@types/dotenv": "^2.0.20",
-    "@types/kue": "^0.9.31",
     "@types/lodash": "^4.14.50",
     "@types/mongodb": "^2.1.37",
     "@types/node": "^7.0.4",
@@ -50,10 +49,10 @@
     "commander": "^2.9.0",
     "dotenv": "^4.0.0",
     "inversify": "^3.0.0",
-    "kue": "^0.11.5",
     "lodash": "^4.17.4",
     "mongodb": "^2.2.22",
     "node-fetch": "^1.6.3",
+    "postal": "^2.0.5",
     "protobufjs": "^6.6.2",
     "reflect-metadata": "^0.1.9"
   }
