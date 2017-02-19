@@ -16,8 +16,6 @@
         "suppressImplicitAnyIndexErrors": true,
         "sourceMap": true,
         "outDir": "lib",
-        "typeRoots": [],
-        "types": [],
         "lib": [
             "es6"
         ]

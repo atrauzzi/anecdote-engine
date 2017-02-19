@@ -45,6 +45,7 @@
     "typescript": "^2.0.0"
   },
   "dependencies": {
+    "@types/postal": "^1.0.28",
     "amqplib": "^0.5.1",
     "commander": "^2.9.0",
     "dotenv": "^4.0.0",

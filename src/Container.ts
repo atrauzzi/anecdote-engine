@@ -1,13 +1,11 @@
-import inversify from "inversify";
-import postal from "postal";
+import {Container, decorate, injectable} from "inversify";
+import * as postal from "postal";
 import {Types} from "./index";
 
 
-const container = new inversify.Container();
+const container = new Container();
 
-container.bind<postal.Postal>(Types.Postal)
+container.bind<IPostal>(Types.Postal)
     .toConstantValue(postal);
-
-inversify.decorate(inversify.injectable(), postal);
 
 export {container};
