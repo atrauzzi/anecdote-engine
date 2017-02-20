@@ -53,7 +53,7 @@ export class Anecdote {
         const queueings = _.flattenDeep<Promise<void>>(
             authors.map((author) =>
                 this.queues.map((queue) =>
-                    queue.dispatchScan(author))));
+                    queue.dispatchScanSources(author))));
 
         // ToDo: I'd love to know if there's a way to sugar this up!
         // Note: "No" from lodash :(  - https://github.com/lodash/lodash/issues/1191

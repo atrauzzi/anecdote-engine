@@ -5,7 +5,7 @@ import {Anecdote} from "./Anecdote";
 
 export interface Queue extends Driver {
 
-    dispatchScan(author: Author): Promise<void>;
+    dispatchScanSources(author: Author): Promise<void>;
 
     // ToDo: Rather than call anecdote directly, we should use a bus.
     work(anecdote: Anecdote): Promise<void>;

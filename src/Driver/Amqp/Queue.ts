@@ -1,3 +1,4 @@
+import * as _ from "lodash";
 import {Queue as QueueContract} from "../../Engine/Queue";
 import {Configuration} from "../../Engine/Configuration";
 import {Author} from "../../Domain/Author";
@@ -15,9 +16,12 @@ export class Queue implements QueueContract {
 
     protected channel: amqp.Channel;
 
-    public constructor(options?: Configuration) {
+    protected bus: IPostal;
+
+    public constructor(options: Configuration, bus: IPostal) {
 
         this.connectionString = options.values["AMQP_CONNECTION_STRING"];
+        this.bus = bus;
     }
 
     protected async connect() {
@@ -44,23 +48,31 @@ export class Queue implements QueueContract {
         }
     }
 
-    public async dispatchScan(author: Author) {
+    public async dispatchScanSources(author: Author) {
 
         await this.connect();
 
-        this.channel.sendToQueue("scan", new Buffer(JSON.stringify(author)));
+        _.forEach(author.sources, (source) =>
+            this.channel.sendToQueue("scan", new Buffer(JSON.stringify({} as ScanSource))));
     }
 
     public async work(anecdote: Anecdote) {
 
         await this.connect();
 
-        await this.channel.consume("scan", (message) => this.handle(message));
+        await this.channel.consume("scan", (message) => this.handleAuthor(message));
     }
 
-    protected async handle(message: amqp.Message) {
+    protected async handleAuthor(message: amqp.Message) {
 
-        console.log(message.content.toString());
+
+
+        this.bus.publish({
+            channel: "author",
+            topic: "found",
+            data: message.content.toString()
+        });
+
         await this.channel.ack(message);
     }
 

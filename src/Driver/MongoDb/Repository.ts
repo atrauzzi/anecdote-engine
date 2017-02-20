@@ -12,7 +12,7 @@ export class Repository implements RepositoryContract {
 
     protected db: Db;
 
-    public constructor(options: Configuration) {
+    public constructor(options: Configuration, bus: IPostal) {
 
         this.serverUri = options.values["MONGODB_HOST"];
     }
