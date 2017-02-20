@@ -45,8 +45,10 @@
     "typescript": "^2.0.0"
   },
   "dependencies": {
+    "@types/chance": "^0.7.31",
     "@types/postal": "^1.0.28",
     "amqplib": "^0.5.1",
+    "chance": "^1.0.4",
     "commander": "^2.9.0",
     "dotenv": "^4.0.0",
     "inversify": "^3.0.0",

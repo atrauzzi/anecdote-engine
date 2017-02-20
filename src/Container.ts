@@ -1,6 +1,6 @@
 import {Container, decorate, injectable} from "inversify";
 import * as postal from "postal";
-import {Types} from "./index";
+import {Types} from "./Engine/index";
 
 
 const container = new Container();

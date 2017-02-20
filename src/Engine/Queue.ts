@@ -1,12 +1,13 @@
 import {Driver} from "./Driver";
 import {Author} from "../Domain/Author";
-import {Anecdote} from "./Anecdote";
 
 
 export interface Queue extends Driver {
 
-    dispatchScanSources(author: Author): Promise<void>;
+    dispatchSourceScans(author: Author): Promise<any>;
 
-    // ToDo: Rather than call anecdote directly, we should use a bus.
-    work(anecdote: Anecdote): Promise<void>;
+    // Handle all types of processing, either asynchronously or sequentially, once.
+    work(): Promise<any>;
+
+    workSources(): Promise<any>;
 }

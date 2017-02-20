@@ -4,6 +4,7 @@ import {Source} from "./Source";
 import {Queue} from "./Queue";
 import {Target} from "./Target";
 import * as Domain from "../Domain/index";
+import {ScanSource} from "./Job/ScanSource";
 
 
 export class Anecdote {
@@ -22,13 +23,18 @@ export class Anecdote {
         protected repository: Repository,
         protected sources: Source[],
         protected queues: Queue[],
-        protected targets: Target[]
+        protected targets: Target[],
+        protected bus: IPostal
     ) {
 
         console.log("Using repository:", this.repository.name);
         console.log("Using post sources:", this.sources.map((source) => source.name));
         console.log("Using queues:", this.queues.map((queue) => queue.name));
         console.log("Using post targets:", this.targets.map((target) => target.name));
+
+        console.log("Registring job handlers.");
+        // ToDo: Probably could do a dynamic dispatch, by-convention.
+        this.bus.subscribe({ channel: "source", topic: "scan", callback: (data, envelope) => this.handleSourceScan(envelope) });
     }
 
     public async setup() {
@@ -46,27 +52,25 @@ export class Anecdote {
         await this.repository.addAuthor(author);
     }
 
-    public async scan() {
+    public async scanSources() {
 
         const authors = await this.repository.authors();
 
         const queueings = _.flattenDeep<Promise<void>>(
             authors.map((author) =>
                 this.queues.map((queue) =>
-                    queue.dispatchScanSources(author))));
+                    queue.dispatchSourceScans(author))));
 
-        // ToDo: I'd love to know if there's a way to sugar this up!
-        // Note: "No" from lodash :(  - https://github.com/lodash/lodash/issues/1191
         await Promise.all(queueings);
     }
 
     public async work() {
 
-        await Promise.all(this.queues.map((queue) => queue.work(this)));
+        await Promise.all(this.queues.map((queue) => queue.work()));
     }
 
-    public async findSource(name: string) {
+    public handleSourceScan(envelope: IEnvelope<ScanSource>) {
 
-        return _.find(this.sources, (source: Source) => source.name === name);
+        console.log(envelope);
     }
 }

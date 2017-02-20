@@ -1,9 +1,10 @@
 import * as _ from "lodash";
+import protobuf from "../../Protobuf";
 import {Queue as QueueContract} from "../../Engine/Queue";
 import {Configuration} from "../../Engine/Configuration";
 import {Author} from "../../Domain/Author";
 import * as amqp from "amqplib";
-import {Anecdote} from "../../Engine/Anecdote";
+import {ScanSource} from "../../Engine/Job/ScanSource";
 
 
 export class Queue implements QueueContract {
@@ -31,7 +32,7 @@ export class Queue implements QueueContract {
             this.connection = await amqp.connect(this.connectionString);
 
             const channel = await this.connection.createChannel();
-            await channel.assertQueue("scan");
+            await channel.assertQueue("scan:sources");
 
             this.channel = channel;
         }
@@ -48,37 +49,62 @@ export class Queue implements QueueContract {
         }
     }
 
-    public async dispatchScanSources(author: Author) {
+    public async dispatchSourceScans(author: Author) {
 
         await this.connect();
 
-        _.forEach(author.sources, (source) =>
-            this.channel.sendToQueue("scan", new Buffer(JSON.stringify({} as ScanSource))));
+        _.forEach(author.sources, (source, name) =>
+            this.channel.sendToQueue("scan:sources", this.toJsonBuffer(<ScanSource>{
+
+                authorId: author.id,
+                sourceName: name,
+                data: this.encodeJson("Source", source)
+            }))
+        );
     }
 
-    public async work(anecdote: Anecdote) {
+    public async work() {
 
         await this.connect();
 
-        await this.channel.consume("scan", (message) => this.handleAuthor(message));
+        const work = [
+            this.workSources(),
+        ];
+
+        await Promise.all(work);
     }
 
-    protected async handleAuthor(message: amqp.Message) {
+    public async workSources() {
 
+        return this.channel.consume("scan:sources", (message) => this.handleSource(message));
+    }
 
+    protected async handleSource(message: amqp.Message) {
 
         this.bus.publish({
-            channel: "author",
-            topic: "found",
-            data: message.content.toString()
+            channel: "source",
+            topic: "scan",
+            data: JSON.parse(message.content.toString())
         });
 
-        await this.channel.ack(message);
+        //await this.channel.ack(message);
     }
 
     public async setup(): Promise<void> {
 
         await this.connect();
         console.log("Successfully connected to AMQP server!");
+    }
+
+    protected toJsonBuffer(data: any) {
+
+        return new Buffer(JSON.stringify(data));
+    }
+
+    protected encodeJson(typeName: string, data: any): any {
+
+        const type = protobuf.lookupType(typeName);
+
+        return type.toObject(data);
     }
 }

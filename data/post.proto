@@ -3,13 +3,15 @@ syntax = "proto3";
 
 message Post {
 
-    PostType postType = 1;
+    string Id = 1;
 
-    string title = 2;
+    PostType postType = 2;
 
-    Author author = 3;
+    string title = 3;
 
-    int32 authored = 4;
+    Author author = 4;
 
-    string content = 5;
+    int32 authored = 5;
+
+    string content = 6;
 }

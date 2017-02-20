@@ -4,7 +4,7 @@ import {command} from "./Base";
 
 command
     .command("setup", "Perform any initial setup and/or migrations required by configured drivers.")
-    .command("scan", "Scan author sources for changes.")
+    .command("scanSources", "Scan author sources for changes.")
     .command("add-author", "Add a new author to the system.")
 ;
 

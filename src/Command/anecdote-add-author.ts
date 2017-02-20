@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import {Chance} from "chance";
 import * as _ from "lodash";
 import {ConfigurationReader} from "../Engine/ConfigurationReader";
 import {container} from "../Container";
@@ -23,6 +24,7 @@ configurationReader.bindAll();
 const anecdote = container.get<Anecdote>(Types.Anecdote);
 
 const author = new Author;
+author.id = Chance().guid();
 author.firstName = command["firstName"];
 author.lastName = command["lastName"];
 author.sources = _.mapValues(command["authorSources"], (sourceData) => {

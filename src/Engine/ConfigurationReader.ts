@@ -1,7 +1,6 @@
 import * as _ from "lodash";
 import * as inversify from "inversify";
-import {Types} from "../";
-import {Types as EngineTypes} from "./";
+import {Types} from "./";
 import {Configuration} from "./Configuration";
 import {Anecdote} from "./Anecdote";
 import {DriverStatic} from "./DriverStatic";
@@ -21,7 +20,7 @@ export class ConfigurationReader {
 
         inversify.decorate(inversify.injectable(), Configuration);
 
-        this.container.bind<Configuration>(EngineTypes.Configuration)
+        this.container.bind<Configuration>(Types.Configuration)
             .toConstantValue(new Configuration(configuration["config"]));
     }
 
@@ -29,14 +28,15 @@ export class ConfigurationReader {
 
         //
         // Populate Type Metadata
-        this.container.bind<Anecdote>(EngineTypes.Anecdote)
+        this.container.bind<Anecdote>(Types.Anecdote)
             .to(Anecdote);
 
         inversify.decorate(inversify.injectable(), Anecdote);
-        inversify.decorate(inversify.inject(EngineTypes.Repository), Anecdote, 0);
-        inversify.decorate(inversify.multiInject(EngineTypes.Source), Anecdote, 1);
-        inversify.decorate(inversify.multiInject(EngineTypes.Queue), Anecdote, 2);
-        inversify.decorate(inversify.multiInject(EngineTypes.Target), Anecdote, 3);
+        inversify.decorate(inversify.inject(Types.Repository), Anecdote, 0);
+        inversify.decorate(inversify.multiInject(Types.Source), Anecdote, 1);
+        inversify.decorate(inversify.multiInject(Types.Queue), Anecdote, 2);
+        inversify.decorate(inversify.multiInject(Types.Target), Anecdote, 3);
+        inversify.decorate(inversify.inject(Types.Postal), Anecdote, 4);
 
         //
         // Bind Implementations
@@ -48,7 +48,7 @@ export class ConfigurationReader {
 
     public bindRepository() {
 
-        this.container.bind<Repository>(EngineTypes.Repository)
+        this.container.bind<Repository>(Types.Repository)
             .to(this.create<Repository>(this.configuration["repository"], "Repository"));
     }
 
@@ -56,7 +56,7 @@ export class ConfigurationReader {
 
         this.configuration["sources"].map((source: string) => {
 
-            this.container.bind<Source>(EngineTypes.Source)
+            this.container.bind<Source>(Types.Source)
                 .to(this.create<Source>(source, "Source"));
         });
     }
@@ -65,7 +65,7 @@ export class ConfigurationReader {
 
         this.configuration["queues"].map((queue: string) => {
 
-            this.container.bind<Queue>(EngineTypes.Queue)
+            this.container.bind<Queue>(Types.Queue)
                 .to(this.create<Queue>(queue, "Queue"));
         });
     }
@@ -74,7 +74,7 @@ export class ConfigurationReader {
 
         this.configuration["targets"].map((target: string) => {
 
-            this.container.bind<Target>(EngineTypes.Target)
+            this.container.bind<Target>(Types.Target)
                 .to(this.create<Target>(target, "Target"));
         });
     }
@@ -87,7 +87,7 @@ export class ConfigurationReader {
         }
 
         inversify.decorate(inversify.injectable(), driver);
-        inversify.decorate(inversify.inject(EngineTypes.Configuration), driver, 0);
+        inversify.decorate(inversify.inject(Types.Configuration), driver, 0);
         inversify.decorate(inversify.inject(Types.Postal), driver, 1);
 
         return driver as DriverStatic<T>;

@@ -3,11 +3,13 @@ syntax = "proto3";
 
 message Author {
 
-    string firstName = 1;
+    string id = 1;
 
-    string lastName = 2;
+    string firstName = 2;
 
-    map<string, Source> sources = 3;
+    string lastName = 3;
 
-    int32 created = 4;
+    map<string, Source> sources = 4;
+
+    int32 created = 5;
 }

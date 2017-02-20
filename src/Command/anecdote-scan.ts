@@ -13,7 +13,7 @@ configurationReader.bindAll();
 
 const anecdote = container.get<Anecdote>(Types.Anecdote);
 
-anecdote.scan()
+anecdote.scanSources()
     .then(() => anecdote.close())
     .catch((error) => console.error(error));
 
