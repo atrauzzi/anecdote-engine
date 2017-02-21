@@ -13,4 +13,6 @@ export class Post {
     public authored: Date;
 
     public type: PostType;
+
+    public uri: string;
 }

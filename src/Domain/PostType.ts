@@ -1,12 +1,23 @@
 
 
-export enum PostType {
+export type PostType =
+    "🖋"
+    | "✏"
+    | "💭"
+    | "🗣"
+;
 
-    Blog,
+export const typeMap = {
 
-    Microblog,
+    // 🖋️ (pen)
+    blog: "🖋",
 
-    Social,
+    // ✏ (pencil)
+    microblog: "✏",
 
-    Comment,
+    // 💭 (thought balloon)
+    social: "💭",
+
+    // 🗣 (speaking head)
+    comment: "🗣"
 }

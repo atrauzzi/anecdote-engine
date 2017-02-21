@@ -69,8 +69,13 @@ export class Anecdote {
         await Promise.all(this.queues.map((queue) => queue.work()));
     }
 
-    public handleSourceScan(envelope: IEnvelope<ScanSource>) {
+    public async handleSourceScan(envelope: IEnvelope<ScanSource>) {
 
-        console.log(envelope);
+        const job = envelope.data;
+        const source = _.find(this.sources, (source) => source.name === job.sourceName);
+
+        await source.scan(job);
+
+        await this.repository.recordScan(job);
     }
 }

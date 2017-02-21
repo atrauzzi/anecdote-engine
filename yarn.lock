@@ -101,6 +101,10 @@
   dependencies:
     "@types/node" "*"
 
+"@types/github@^0.0.0":
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/@types/github/-/github-0.0.0.tgz#f32202bcdb15ac916cd079caba9e9f45bb304e76"
+
 "@types/lodash@^4.14.50":
   version "4.14.52"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.52.tgz#de5c7ab14da1289733233c9b0ec6f9e377db90f5"
@@ -108,6 +112,12 @@
 "@types/long@^3.0.31":
   version "3.0.31"
   resolved "https://registry.yarnpkg.com/@types/long/-/long-3.0.31.tgz#08635b0d0d322676940c1a88a7a9cef661c6f34a"
+
+"@types/moment@^2.13.0":
+  version "2.13.0"
+  resolved "https://registry.yarnpkg.com/@types/moment/-/moment-2.13.0.tgz#604ebd189bc3bc34a1548689404e61a2a4aac896"
+  dependencies:
+    moment "*"
 
 "@types/mongodb@^2.1.37":
   version "2.1.40"
@@ -703,6 +713,15 @@ github@^8.0.0:
     mime "^1.2.11"
     netrc "^0.1.4"
 
+github@^9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/github/-/github-9.0.0.tgz#b26c815965956975d96a668263306e011214095f"
+  dependencies:
+    follow-redirects "0.0.7"
+    https-proxy-agent "^1.0.0"
+    mime "^1.2.11"
+    netrc "^0.1.4"
+
 github@~0.1.10:
   version "0.1.16"
   resolved "https://registry.yarnpkg.com/github/-/github-0.1.16.tgz#895d2a85b0feb7980d89ac0ce4f44dcaa03f17b5"
@@ -1128,6 +1147,10 @@ mkdirp@^0.5.0, mkdirp@^0.5.1:
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.5.1.tgz#30057438eac6cf7f8c4767f38648d6697d75c903"
   dependencies:
     minimist "0.0.8"
+
+moment@*, moment@^2.17.1:
+  version "2.17.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.17.1.tgz#fed9506063f36b10f066c8b59a144d7faebe1d82"
 
 mongodb-core@2.1.8:
   version "2.1.8"

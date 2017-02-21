@@ -30,7 +30,9 @@ author.lastName = command["lastName"];
 author.sources = _.mapValues(command["authorSources"], (sourceData) => {
 
     const source = new Source;
+
     source.nativeId = sourceData.nativeId;
+    source.username = sourceData.username;
     source.token = sourceData.token;
 
     return source;

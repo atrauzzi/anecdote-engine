@@ -5,7 +5,9 @@ message Source {
 
     string nativeId = 1;
 
-    int32 lastChecked = 2;
+    string username = 2;
 
-    string token = 3;
+    int32 lastChecked = 3;
+
+    string token = 4;
 }

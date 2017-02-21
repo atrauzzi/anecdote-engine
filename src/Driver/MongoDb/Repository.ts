@@ -2,6 +2,7 @@ import {MongoClient, Db} from "mongodb";
 import {Repository as RepositoryContract} from "../../Engine/Repository";
 import {Author} from "../../Domain/Author";
 import {Configuration} from "../../Engine/Configuration";
+import {ScanSource} from "../../Engine/Job/ScanSource";
 
 
 export class Repository implements RepositoryContract {
@@ -58,5 +59,10 @@ export class Repository implements RepositoryContract {
 
         await this.connect();
         console.log("Successfully connected to MongoDB!");
+    }
+
+    public recordScan(job: ScanSource): void {
+
+        console.log("ToDo: Save recording of scan: ", job);
     }
 }
