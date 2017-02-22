@@ -5,6 +5,7 @@ import {Configuration} from "../../Engine/Configuration";
 import {Author} from "../../Domain/Author";
 import * as amqp from "amqplib";
 import {ScanSource} from "../../Engine/Job/ScanSource";
+import {Replies} from "amqplib";
 
 
 export class Queue implements QueueContract {
@@ -74,7 +75,7 @@ export class Queue implements QueueContract {
         await Promise.all(work);
     }
 
-    public async workSources() {
+    public async workSources(): Promise<Replies.Consume> {
 
         return this.channel.consume("scan:sources", (message) => this.handleSource(message));
     }

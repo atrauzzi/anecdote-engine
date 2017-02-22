@@ -10,14 +10,14 @@ export type PostType =
 export const typeMap = {
 
     // 🖋️ (pen)
-    blog: "🖋",
+    blog: "🖋" as PostType,
 
     // ✏ (pencil)
-    microblog: "✏",
+    microblog: "✏" as PostType,
 
     // 💭 (thought balloon)
-    social: "💭",
+    social: "💭" as PostType,
 
     // 🗣 (speaking head)
-    comment: "🗣"
+    comment: "🗣" as PostType
 }

@@ -5,6 +5,7 @@ import {Queue} from "./Queue";
 import {Target} from "./Target";
 import * as Domain from "../Domain/index";
 import {ScanSource} from "./Job/ScanSource";
+import {PostFound} from "./Job/PostFound";
 
 
 export class Anecdote {
@@ -35,6 +36,7 @@ export class Anecdote {
         console.log("Registring job handlers.");
         // ToDo: Probably could do a dynamic dispatch, by-convention.
         this.bus.subscribe({ channel: "source", topic: "scan", callback: (data, envelope) => this.handleSourceScan(envelope) });
+        this.bus.subscribe({ channel: "post", topic: "found", callback: (data, envelope) => this.handleFoundPost(envelope) });
     }
 
     public async setup() {
@@ -77,5 +79,13 @@ export class Anecdote {
         await source.scan(job);
 
         await this.repository.recordScan(job);
+    }
+
+    public async handleFoundPost(envelope: IEnvelope<PostFound>) {
+
+        const job = envelope.data;
+        const post = job.post;
+
+        //post.
     }
 }

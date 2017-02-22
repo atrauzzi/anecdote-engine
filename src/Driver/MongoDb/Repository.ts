@@ -63,6 +63,6 @@ export class Repository implements RepositoryContract {
 
     public recordScan(job: ScanSource): void {
 
-        console.log("ToDo: Save recording of scan: ", job);
+        //console.log("ToDo: Save recording of scan: ", job);
     }
 }

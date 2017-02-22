@@ -1,8 +1,13 @@
+import * as _ from "lodash";
 import {Source as SourceContract} from "../../Engine/Source";
 import {Post} from "../../Domain/Post";
 import {ScanSource} from "../../Engine/Job/ScanSource";
 import * as Client from "github";
 import * as moment from "moment";
+import {Configuration} from "../../Engine/Configuration";
+import {typeMap} from "../../Domain/PostType";
+import * as chance from "chance";
+import fetch from "node-fetch";
 
 
 export class Source implements SourceContract {
@@ -11,9 +16,9 @@ export class Source implements SourceContract {
 
     protected client: Client;
 
-    protected defaultLastScanned = moment().subtract(1, "year");
+    protected defaultLastScanned = moment().subtract(3, "months");
 
-    public constructor() {
+    public constructor(configuration: Configuration, protected bus: IPostal) {
 
         this.client = new Client({
             headers: {
@@ -44,7 +49,7 @@ export class Source implements SourceContract {
         await Promise.all(jobs);
     }
 
-    public async loadBlogPosts(job: ScanSource): Promise<Post[]> {
+    public async loadBlogPosts(job: ScanSource): Promise<any> {
 
         const gists = await this.client.gists.getForUser({
             username: job.data.username,
@@ -52,8 +57,36 @@ export class Source implements SourceContract {
             per_page: 10,
         });
 
-        console.log(gists);
-
-        return null;
+        await Promise.all(_.map(gists.data, (gist) => this.gistToBlogPost(gist, job.authorId)));
     }
+
+    protected async gistToBlogPost(gist: any, authorId: string) {
+
+        const markdown = _.find(gist.files, (file: any) => file.language === "Markdown");
+
+        if(
+            markdown
+            && gist.description.includes(typeMap.blog)
+        ) {
+
+            const contentResponse = await fetch(markdown.raw_url);
+
+            const post = new Post();
+
+            post.id = chance().guid();
+            post.authored = moment.utc(gist.created_at).toDate();
+            post.content = await contentResponse.text();
+            post.title = _.replace(gist.description, typeMap.blog, "").trim();
+            post.uri = gist.url;
+            post.type = typeMap.blog;
+            post.authorId = authorId;
+
+            this.bus.publish({
+                channel: "post",
+                topic: "found",
+                data: post,
+            });
+        }
+    }
+
 }
