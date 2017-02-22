@@ -84,7 +84,9 @@ export class Source implements SourceContract {
             this.bus.publish({
                 channel: "post",
                 topic: "found",
-                data: post,
+                data: {
+                    post: post
+                },
             });
         }
     }

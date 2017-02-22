@@ -85,7 +85,7 @@ export class Anecdote {
 
         const job = envelope.data;
         const post = job.post;
-
-        //post.
+console.log("FROM ENGINE!");
+        console.log(post);
     }
 }
