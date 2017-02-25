@@ -1,11 +1,14 @@
 import {Container, decorate, injectable} from "inversify";
-import * as postal from "postal";
+import {Service as Bus} from "./Bus/Service";
 import {Types} from "./Engine/index";
 
 
 const container = new Container();
 
-container.bind<IPostal>(Types.Postal)
-    .toConstantValue(postal);
+decorate(injectable(), Bus);
+
+container.bind<Bus>(Types.Bus)
+    .to(Bus)
+    .inSingletonScope();
 
 export {container};

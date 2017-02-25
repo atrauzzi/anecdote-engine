@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import {Chance} from "chance";
 import * as _ from "lodash";
-import {ConfigurationReader} from "../Engine/ConfigurationReader";
+import {ServiceProvider} from "../ServiceProvider";
 import {container} from "../Container";
 import {command, setting} from "./Base";
 import {Anecdote} from "../Engine/Anecdote";
@@ -18,7 +18,7 @@ command
 
 command.parse(process.argv);
 
-const configurationReader = new ConfigurationReader(container, command);
+const configurationReader = new ServiceProvider(container, command);
 configurationReader.bindAll();
 
 const anecdote = container.get<Anecdote>(Types.Anecdote);

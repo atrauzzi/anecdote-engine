@@ -1,45 +1,51 @@
 import * as _ from "lodash";
 import * as inversify from "inversify";
-import {Types} from "./";
-import {Configuration} from "./Configuration";
-import {Anecdote} from "./Anecdote";
-import {DriverStatic} from "./DriverStatic";
-import {Driver} from "./Driver";
-import {Repository} from "./Repository";
-import {Source} from "./Source";
-import {Queue} from "./Queue";
-import {Target} from "./Target";
+import {Types} from "./Engine";
+import {Configuration} from "./Engine/Configuration";
+import {Anecdote} from "./Engine/Anecdote";
+import {DriverStatic} from "./Engine/DriverStatic";
+import {Driver} from "./Engine/Driver";
+import {Driver as MongoDbDriver} from "./Driver/MongoDb/Driver";
+import {Repository} from "./Engine/Repository";
+import {Source} from "./Engine/Source";
+import {Queue} from "./Engine/Queue";
+import {Target} from "./Engine/Target";
 
 
-export class ConfigurationReader {
+export class ServiceProvider {
 
     constructor(
         protected container: inversify.Container,
         protected configuration: {[key: string]: any}
     ) {
-
-        inversify.decorate(inversify.injectable(), Configuration);
-
-        this.container.bind<Configuration>(Types.Configuration)
-            .toConstantValue(new Configuration(configuration["config"]));
     }
 
     public bindAll() {
 
         //
         // Populate Type Metadata
-        this.container.bind<Anecdote>(Types.Anecdote)
-            .to(Anecdote);
+
+        inversify.decorate(inversify.injectable(), Configuration);
+
+        // ToDo: I really want runtime reflection.
+        this.bindDriver(MongoDbDriver);
 
         inversify.decorate(inversify.injectable(), Anecdote);
         inversify.decorate(inversify.inject(Types.Repository), Anecdote, 0);
         inversify.decorate(inversify.multiInject(Types.Source), Anecdote, 1);
         inversify.decorate(inversify.multiInject(Types.Queue), Anecdote, 2);
         inversify.decorate(inversify.multiInject(Types.Target), Anecdote, 3);
-        inversify.decorate(inversify.inject(Types.Postal), Anecdote, 4);
+        inversify.decorate(inversify.inject(Types.Bus), Anecdote, 4);
 
         //
         // Bind Implementations
+
+        this.container.bind<Configuration>(Types.Configuration)
+            .toConstantValue(new Configuration(this.configuration["config"]));
+
+        this.container.bind<Anecdote>(Types.Anecdote)
+            .to(Anecdote);
+
         this.bindRepository();
         this.bindSources();
         this.bindQueues();
@@ -49,7 +55,7 @@ export class ConfigurationReader {
     public bindRepository() {
 
         this.container.bind<Repository>(Types.Repository)
-            .to(this.create<Repository>(this.configuration["repository"], "Repository"));
+            .to(this.bindDriver<Repository>(this.configuration["repository"], "Repository"));
     }
 
     public bindSources() {
@@ -57,7 +63,7 @@ export class ConfigurationReader {
         this.configuration["sources"].map((source: string) => {
 
             this.container.bind<Source>(Types.Source)
-                .to(this.create<Source>(source, "Source"));
+                .to(this.bindDriver<Source>(source, "Source"));
         });
     }
 
@@ -66,7 +72,7 @@ export class ConfigurationReader {
         this.configuration["queues"].map((queue: string) => {
 
             this.container.bind<Queue>(Types.Queue)
-                .to(this.create<Queue>(queue, "Queue"));
+                .to(this.bindDriver<Queue>(queue, "Queue"));
         });
     }
 
@@ -75,11 +81,11 @@ export class ConfigurationReader {
         this.configuration["targets"].map((target: string) => {
 
             this.container.bind<Target>(Types.Target)
-                .to(this.create<Target>(target, "Target"));
+                .to(this.bindDriver<Target>(target, "Target"));
         });
     }
 
-    private create<T extends Driver>(driver: string|DriverStatic<T>, type: string) {
+    private bindDriver<T extends Driver>(driver: any, type?: string) {
 
         if(_.isString(driver)) {
 
@@ -88,7 +94,7 @@ export class ConfigurationReader {
 
         inversify.decorate(inversify.injectable(), driver);
         inversify.decorate(inversify.inject(Types.Configuration), driver, 0);
-        inversify.decorate(inversify.inject(Types.Postal), driver, 1);
+        inversify.decorate(inversify.inject(Types.Bus), driver, 1);
 
         return driver as DriverStatic<T>;
     }

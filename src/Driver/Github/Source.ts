@@ -1,5 +1,6 @@
 import * as _ from "lodash";
 import {Source as SourceContract} from "../../Engine/Source";
+import {Service as Bus} from "../../Bus/Service";
 import {Post} from "../../Domain/Post";
 import {ScanSource} from "../../Engine/Job/ScanSource";
 import * as Client from "github";
@@ -18,7 +19,7 @@ export class Source implements SourceContract {
 
     protected defaultLastScanned = moment().subtract(3, "months");
 
-    public constructor(configuration: Configuration, protected bus: IPostal) {
+    public constructor(configuration: Configuration, protected bus: Bus) {
 
         this.client = new Client({
             headers: {
@@ -81,13 +82,7 @@ export class Source implements SourceContract {
             post.type = typeMap.blog;
             post.authorId = authorId;
 
-            this.bus.publish({
-                channel: "post",
-                topic: "found",
-                data: {
-                    post: post
-                },
-            });
+            await this.bus.dispatch("post", "found", post);
         }
     }
 

@@ -2,6 +2,7 @@ import * as _ from "lodash";
 import protobuf from "../../Protobuf";
 import {Queue as QueueContract} from "../../Engine/Queue";
 import {Configuration} from "../../Engine/Configuration";
+import {Service as Bus} from "../../Bus/Service";
 import {Author} from "../../Domain/Author";
 import * as amqp from "amqplib";
 import {ScanSource} from "../../Engine/Job/ScanSource";
@@ -18,9 +19,9 @@ export class Queue implements QueueContract {
 
     protected channel: amqp.Channel;
 
-    protected bus: IPostal;
+    protected bus: Bus;
 
-    public constructor(options: Configuration, bus: IPostal) {
+    public constructor(options: Configuration, bus: Bus) {
 
         this.connectionString = options.values["AMQP_CONNECTION_STRING"];
         this.bus = bus;
@@ -82,12 +83,9 @@ export class Queue implements QueueContract {
 
     protected async handleSource(message: amqp.Message) {
 
-        this.bus.publish({
-            channel: "source",
-            topic: "scan",
-            data: JSON.parse(message.content.toString())
-        });
+        await this.bus.dispatch("source", "scan", JSON.parse(message.content.toString()));
 
+        // ToDo: Uncomment this once we're done testing the queue.
         //await this.channel.ack(message);
     }
 

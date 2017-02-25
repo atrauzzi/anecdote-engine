@@ -4,7 +4,7 @@ import {Anecdote} from "./Anecdote";
 export const Types = {
 
     Anecdote: Symbol("Anecdote"),
-    Postal: Symbol("Postal"),
+    Bus: Symbol("Bus"),
     Configuration: Symbol("Configuration"),
     Repository: Symbol("Repository"),
     Source: Symbol("Source"),

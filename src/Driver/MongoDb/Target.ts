@@ -1,18 +1,20 @@
+import {Driver} from "./Driver";
 import {Target as TargetContract} from "../../Engine/Target";
-import {Author} from "../../Domain/Author";
+import {Post} from "../../Domain/Post";
+import {Configuration} from "../../Engine/Configuration";
 
 
-export class Target implements TargetContract {
+export class Target extends Driver implements TargetContract {
 
-    name: string;
+    public constructor(options: Configuration, bus: IPostal) {
 
-    public async setup() {
-
-        return undefined;
+        super(options, bus);
     }
 
-    public async close() {
+    public async savePost(post: Post) {
 
-        return null;
+        await this.connect();
+
+        await this.save("post", post);
     }
 }

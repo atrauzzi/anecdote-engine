@@ -16,4 +16,8 @@ message Post {
     string type = 6;
 
     string uri = 7;
+
+    string nativeId = 8;
+
+    string source = 9;
 }

@@ -17,4 +17,8 @@ export class Post {
     public type: PostType;
 
     public uri: string;
+
+    public nativeId: string;
+
+    public source: string;
 }
