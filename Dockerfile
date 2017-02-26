@@ -19,6 +19,7 @@ RUN apt-get install -y nodejs
 
 RUN npm install -g yarn
 RUN npm install -g node-inspector
+RUN npm install -g semantic-release-cli
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 

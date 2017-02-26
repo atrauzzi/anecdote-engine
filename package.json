@@ -1,6 +1,6 @@
 {
   "name": "anecdote-engine",
-  "version": "0.0.0-developent",
+  "version": "0.0.0-development",
   "main": "lib/index.js",
   "types": "./lib/index.d.ts",
   "license": "Apache-2.0",
@@ -21,7 +21,8 @@
     "lint": "node ./node_modules/tslint/bin/tslint src/**/*.ts",
     "pbjs": "node ./node_modules/protobufjs/bin/pbjs",
     "pbts": "node ./node_modules/protobufjs/bin/pbts",
-    "tsc": "node ./node_modules/typescript/bin/tsc"
+    "tsc": "node ./node_modules/typescript/bin/tsc",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
     "type": "git",

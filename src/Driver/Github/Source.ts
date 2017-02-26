@@ -1,15 +1,15 @@
 import * as _ from "lodash";
-import {Source as SourceContract} from "../../Engine/Source";
-import {Service as Bus} from "../../Bus/Service";
-import {Post} from "../../Domain/Post";
-import {ScanSource} from "../../Engine/Job/ScanSource";
-import * as Client from "github";
-import * as moment from "moment";
-import {Configuration} from "../../Engine/Configuration";
-import {typeMap} from "../../Domain/PostType";
-import * as chance from "chance";
 import fetch from "node-fetch";
+import * as chance from "chance";
+import * as moment from "moment";
+import * as Client from "github";
+import {typeMap} from "../../Domain/PostType";
+import {Configuration} from "../../Engine/Configuration";
+import {Service as Bus} from "../../Bus/Service";
+import {Source as SourceContract} from "../../Engine/Source";
+import {ScanSource} from "../../Engine/Job/ScanSource";
 import {PostFound} from "../../Engine/Job/PostFound";
+import {Post} from "../../Domain/Post";
 
 
 export class Source implements SourceContract {
@@ -76,6 +76,8 @@ export class Source implements SourceContract {
             const post = new Post();
 
             post.id = chance().guid();
+            post.source = this.name;
+            post.nativeId = gist.owner.id;
             post.authored = moment.utc(gist.created_at).toDate();
             post.content = await contentResponse.text();
             post.title = _.replace(gist.description, typeMap.blog, "").trim();

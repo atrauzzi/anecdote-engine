@@ -20,4 +20,4 @@ export const typeMap = {
 
     // 🗣 (speaking head)
     comment: "🗣" as PostType
-}
+};
