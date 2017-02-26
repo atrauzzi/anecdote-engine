@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 import {Chance} from "chance";
 import * as _ from "lodash";
+import {command, setting} from "./Base";
 import {ServiceProvider} from "../ServiceProvider";
 import {container} from "../Container";
-import {command, setting} from "./Base";
 import {Anecdote} from "../Engine/Anecdote";
 import {Author} from "../Domain/Author";
 import {Source} from "../Domain/Source";

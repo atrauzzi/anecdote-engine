@@ -1,5 +1,4 @@
 import * as _ from "lodash";
-import * as process from "process";
 import protobuf from "../../Protobuf";
 import {Queue as QueueContract} from "../../Engine/Queue";
 import {Configuration} from "../../Engine/Configuration";
@@ -21,7 +20,7 @@ export class Queue implements QueueContract {
 
     protected bus: Bus;
 
-    protected active: number;
+    protected active = 0;
 
     public constructor(options: Configuration, bus: Bus) {
 
@@ -67,58 +66,47 @@ export class Queue implements QueueContract {
         );
     }
 
+    public working() {
+
+        return !!this.active;
+    }
+
     public async work() {
 
         await this.connect();
 
-        this.active = 1;
-
-        const work = [
-            this.workSources(),
-            this.blockUntilFinished(),
-        ];
-
-        await Promise.all(work);
-
-        console.log("leaving work");
+        this.workSources();
     }
 
-    public async workSources() {
+    public workSources() {
 
         this.channel.consume("scan:sources", (message) => this.handleSource(message));
     }
 
-    protected async blockUntilFinished() {
-
-        const blocker = new Promise((resolve) => {
-
-            //process.nextTick(() => {
-            setImmediate(() => {
-
-                if(this.active) {
-console.log("blocking");
-                    resolve(this.blockUntilFinished());
-                }
-                else {
-
-                    resolve();
-                }
-            });
-        });
-
-        await blocker;
-    }
-
     protected async handleSource(message: amqp.Message) {
-console.log("handling something");
 
         ++this.active;
 
-        await this.bus.dispatch("source", "scan", JSON.parse(message.content.toString()));
+        const job = JSON.parse(message.content.toString());
+
+        try {
+
+            await this.bus.dispatch("source", "scan", job);
+
+            console.log("Handled job: ", job);
+            console.log("");
+        }
+        catch(ex) {
+
+            this.channel.reject(message, false);
+
+            console.warn("Error handling job: ", job);
+            console.warn("Reason: ", ex);
+            console.warn("");
+        }
 
         --this.active;
-
-        //await this.channel.ack(message);
+        await this.channel.ack(message);
     }
 
     public async setup(): Promise<void> {

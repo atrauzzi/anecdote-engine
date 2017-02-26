@@ -1,5 +1,6 @@
 import {Driver} from "./Driver";
 import {Repository as RepositoryContract} from "../../Engine/Repository";
+import {Service as Bus} from "../../Bus/Service";
 import {Author} from "../../Domain/Author";
 import {ScanSource} from "../../Engine/Job/ScanSource";
 import {Configuration} from "../../Engine/Configuration";
@@ -7,7 +8,7 @@ import {Configuration} from "../../Engine/Configuration";
 
 export class Repository extends Driver implements RepositoryContract {
 
-    public constructor(options: Configuration, bus: IPostal) {
+    public constructor(options: Configuration, bus: Bus) {
 
         super(options, bus);
     }

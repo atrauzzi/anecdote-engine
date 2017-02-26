@@ -64,7 +64,7 @@ export class Source implements SourceContract {
 
     protected async gistToBlogPost(gist: any, authorId: string) {
 
-        const markdown = _.find(gist.files, (file: any) => file.language === "Markdown");
+        const markdown: any = _.find(gist.files, (file: any) => file.language === "Markdown");
 
         if(
             markdown

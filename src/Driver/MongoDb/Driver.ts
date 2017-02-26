@@ -1,4 +1,5 @@
 import {Driver as AnecdoteDriver} from "../../Engine/Driver";
+import {Service as Bus} from "../../Bus/Service";
 import {Configuration} from "../../Engine/Configuration";
 import {MongoClient, Db} from "mongodb";
 
@@ -11,7 +12,7 @@ export abstract class Driver implements AnecdoteDriver {
 
     protected db: Db;
 
-    public constructor(options: Configuration, bus: IPostal) {
+    public constructor(options: Configuration, bus: Bus) {
 
         this.serverUri = options.values["MONGODB_HOST"];
     }
@@ -20,6 +21,7 @@ export abstract class Driver implements AnecdoteDriver {
 
         if(!this.db) {
 
+            //noinspection TypeScriptUnresolvedFunction
             this.db = await MongoClient.connect(this.serverUri);
         }
     }

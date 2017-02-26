@@ -8,4 +8,6 @@ export interface Driver {
     setup(): Promise<void>;
 
     close(): Promise<void>;
+
+    working?(): boolean;
 }

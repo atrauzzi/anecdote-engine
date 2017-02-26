@@ -69,11 +69,14 @@ export class Anecdote {
         await Promise.all(queueings);
     }
 
-    public async work() {
+    public work() {
 
-        const queuePromises = this.queues.map((queue) => queue.work());
+        this.queues.forEach((queue) => queue.work());
+    }
 
-        await Promise.all(queuePromises);
+    public working() {
+
+        return this.drivers.some((driver) => driver.working && driver.working());
     }
 
     public async handleSourceScan(envelope: Envelope<ScanSource>) {

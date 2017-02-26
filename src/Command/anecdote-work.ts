@@ -12,10 +12,22 @@ const configurationReader = new ServiceProvider(container, command);
 configurationReader.bindAll();
 
 const anecdote = container.get<Anecdote>(Types.Anecdote);
+const interval = 5 * 1000;
 
-anecdote.work()
-    .then(() => {
-        console.log("closing things down");
-        anecdote.close();
-    })
-    .catch((error) => console.error(error));
+
+const heartBeat = setInterval(
+    () => {
+
+        console.log("Beat...");
+
+        if(!anecdote.working()) {
+
+            console.log("...Heart beat.");
+            clearInterval(heartBeat);
+            anecdote.close();
+        }
+    },
+    interval
+);
+
+anecdote.work();
