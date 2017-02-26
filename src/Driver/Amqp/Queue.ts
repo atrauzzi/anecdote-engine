@@ -1,4 +1,5 @@
 import * as _ from "lodash";
+import * as process from "process";
 import protobuf from "../../Protobuf";
 import {Queue as QueueContract} from "../../Engine/Queue";
 import {Configuration} from "../../Engine/Configuration";
@@ -6,7 +7,6 @@ import {Service as Bus} from "../../Bus/Service";
 import {Author} from "../../Domain/Author";
 import * as amqp from "amqplib";
 import {ScanSource} from "../../Engine/Job/ScanSource";
-import {Replies} from "amqplib";
 
 
 export class Queue implements QueueContract {
@@ -20,6 +20,8 @@ export class Queue implements QueueContract {
     protected channel: amqp.Channel;
 
     protected bus: Bus;
+
+    protected active: number;
 
     public constructor(options: Configuration, bus: Bus) {
 
@@ -69,23 +71,53 @@ export class Queue implements QueueContract {
 
         await this.connect();
 
+        this.active = 1;
+
         const work = [
             this.workSources(),
+            this.blockUntilFinished(),
         ];
 
         await Promise.all(work);
+
+        console.log("leaving work");
     }
 
-    public async workSources(): Promise<Replies.Consume> {
+    public async workSources() {
 
-        return this.channel.consume("scan:sources", (message) => this.handleSource(message));
+        this.channel.consume("scan:sources", (message) => this.handleSource(message));
+    }
+
+    protected async blockUntilFinished() {
+
+        const blocker = new Promise((resolve) => {
+
+            //process.nextTick(() => {
+            setImmediate(() => {
+
+                if(this.active) {
+console.log("blocking");
+                    resolve(this.blockUntilFinished());
+                }
+                else {
+
+                    resolve();
+                }
+            });
+        });
+
+        await blocker;
     }
 
     protected async handleSource(message: amqp.Message) {
+console.log("handling something");
+
+        ++this.active;
 
         await this.bus.dispatch("source", "scan", JSON.parse(message.content.toString()));
 
-        // ToDo: Uncomment this once we're done testing the queue.
+        --this.active;
+
         //await this.channel.ack(message);
     }
 

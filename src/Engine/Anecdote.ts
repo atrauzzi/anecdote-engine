@@ -71,7 +71,9 @@ export class Anecdote {
 
     public async work() {
 
-        await Promise.all(this.queues.map((queue) => queue.work()));
+        const queuePromises = this.queues.map((queue) => queue.work());
+
+        await Promise.all(queuePromises);
     }
 
     public async handleSourceScan(envelope: Envelope<ScanSource>) {

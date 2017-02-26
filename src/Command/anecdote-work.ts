@@ -14,5 +14,8 @@ configurationReader.bindAll();
 const anecdote = container.get<Anecdote>(Types.Anecdote);
 
 anecdote.work()
-    .then(() => anecdote.close())
+    .then(() => {
+        console.log("closing things down");
+        anecdote.close();
+    })
     .catch((error) => console.error(error));

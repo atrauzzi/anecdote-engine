@@ -9,6 +9,7 @@ import {Configuration} from "../../Engine/Configuration";
 import {typeMap} from "../../Domain/PostType";
 import * as chance from "chance";
 import fetch from "node-fetch";
+import {PostFound} from "../../Engine/Job/PostFound";
 
 
 export class Source implements SourceContract {
@@ -82,7 +83,9 @@ export class Source implements SourceContract {
             post.type = typeMap.blog;
             post.authorId = authorId;
 
-            await this.bus.dispatch("post", "found", post);
+            await this.bus.dispatch("post", "found", {
+                post: post,
+            } as PostFound);
         }
     }
 
