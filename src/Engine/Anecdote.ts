@@ -79,7 +79,7 @@ export class Anecdote {
         return this.drivers.some((driver) => driver.working && driver.working());
     }
 
-    public async handleSourceScan(envelope: Envelope<ScanSource>) {
+    protected async handleSourceScan(envelope: Envelope<ScanSource>) {
 
         const job = envelope.data;
         const source = _.find(this.sources, (source) => source.name === job.sourceName);
@@ -89,7 +89,7 @@ export class Anecdote {
         await this.repository.recordScan(job);
     }
 
-    public async handleFoundPost(envelope: Envelope<PostFound>) {
+    protected async handleFoundPost(envelope: Envelope<PostFound>) {
 
         const job = envelope.data;
         const post = job.post;
