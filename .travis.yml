@@ -16,7 +16,6 @@ install:
   - touch .env
   - docker-compose run --rm cli yarn install
 
-
 script:
   - docker-compose run --rm cli tsc
 

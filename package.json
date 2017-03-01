@@ -21,7 +21,7 @@
     "lint": "node ./node_modules/tslint/bin/tslint src/**/*.ts",
     "pbjs": "node ./node_modules/protobufjs/bin/pbjs",
     "pbts": "node ./node_modules/protobufjs/bin/pbts",
-    "tsc": "node ./node_modules/typescript/bin/tsc",
+    "tsc": "node ./node_modules/typescript/bin/tsc --skipLibCheck",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {

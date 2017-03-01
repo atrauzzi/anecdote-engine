@@ -3,6 +3,7 @@ import {Subscription} from "./Subscription";
 import {Envelope} from "./Envelope";
 import {Callback} from "./Callback";
 
+
 // ToDo: Separate package called "bus service".."microtransit".."bus line"?
 export class Service {
 
