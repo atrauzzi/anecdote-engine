@@ -17,7 +17,8 @@ install:
   - docker-compose run --rm cli yarn install
 
 script:
-  - docker-compose run --rm cli tsc
+  - docker-compose run --rm cli yarn generate-protobuf-meta
+  - docker-compose run --rm cli yarn tsc
 
 after_success:
   - npm run semantic-release

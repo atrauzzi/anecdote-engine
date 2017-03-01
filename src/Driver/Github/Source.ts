@@ -20,7 +20,11 @@ export class Source implements SourceContract {
 
     protected defaultLastScanned = moment().subtract(3, "months");
 
-    public constructor(configuration: Configuration, protected bus: Bus) {
+    public constructor(
+        configuration: Configuration,
+        protected bus: Bus,
+        protected marked: MarkedStatic
+    ) {
 
         this.client = new Client({
             headers: {
@@ -73,13 +77,16 @@ export class Source implements SourceContract {
 
             const contentResponse = await fetch(markdown.raw_url);
 
+            const contentMarkdown = await contentResponse.text();
+            const contentHtml = this.marked(contentMarkdown);
+
             const post = new Post();
 
             post.id = chance().guid();
             post.source = this.name;
             post.nativeId = gist.owner.id;
             post.authored = moment.utc(gist.created_at).toDate();
-            post.content = await contentResponse.text();
+            post.contentHtml = contentHtml;
             post.title = _.replace(gist.description, typeMap.blog, "").trim();
             post.uri = gist.url;
             post.type = typeMap.blog;
@@ -90,5 +97,4 @@ export class Source implements SourceContract {
             } as PostFound);
         }
     }
-
 }

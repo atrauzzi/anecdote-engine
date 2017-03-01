@@ -9,7 +9,7 @@ message Post {
 
     string title = 3;
 
-    string content = 4;
+    string contentHtml = 4;
 
     int32 authored = 5;
 

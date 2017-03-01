@@ -62,6 +62,8 @@ export class ServiceProvider {
 
         this.configuration["sources"].map((source: string) => {
 
+            inversify.decorate(inversify.inject(Types.Marked), source, 2);
+
             this.container.bind<Source>(Types.Source)
                 .to(this.bindDriver<Source>(source, "Source"));
         });

@@ -10,7 +10,7 @@ export class Post {
 
     public title: string;
 
-    public content: string;
+    public contentHtml: string;
 
     public authored: Date;
 

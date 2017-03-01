@@ -10,4 +10,5 @@ export const Types = {
     Source: Symbol("Source"),
     Queue: Symbol("Queue"),
     Target: Symbol("Target"),
+    Marked: Symbol("Marked"),
 };
