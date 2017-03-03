@@ -2,7 +2,7 @@ import * as _ from "lodash";
 import * as inversify from "inversify";
 import {Types} from "./Engine";
 import {Configuration} from "./Engine/Configuration";
-import {Anecdote} from "./Engine/Anecdote";
+import {Service} from "./Engine/Service";
 import {DriverStatic} from "./Engine/DriverStatic";
 import {Driver} from "./Engine/Driver";
 import {Driver as MongoDbDriver} from "./Driver/MongoDb/Driver";
@@ -16,7 +16,7 @@ export class ServiceProvider {
 
     constructor(
         protected container: inversify.Container,
-        protected configuration: {[key: string]: any}
+        protected configuration: Configuration
     ) {
     }
 
@@ -25,26 +25,24 @@ export class ServiceProvider {
         //
         // Populate Type Metadata
 
-        inversify.decorate(inversify.injectable(), Configuration);
-
         // ToDo: I really want runtime reflection.
         this.bindDriver(MongoDbDriver);
 
-        inversify.decorate(inversify.injectable(), Anecdote);
-        inversify.decorate(inversify.inject(Types.Repository), Anecdote, 0);
-        inversify.decorate(inversify.multiInject(Types.Source), Anecdote, 1);
-        inversify.decorate(inversify.multiInject(Types.Queue), Anecdote, 2);
-        inversify.decorate(inversify.multiInject(Types.Target), Anecdote, 3);
-        inversify.decorate(inversify.inject(Types.Bus), Anecdote, 4);
+        inversify.decorate(inversify.injectable(), Service);
+        inversify.decorate(inversify.inject(Types.Repository), Service, 0);
+        inversify.decorate(inversify.multiInject(Types.Source), Service, 1);
+        inversify.decorate(inversify.multiInject(Types.Queue), Service, 2);
+        inversify.decorate(inversify.multiInject(Types.Target), Service, 3);
+        inversify.decorate(inversify.inject(Types.Bus), Service, 4);
 
         //
         // Bind Implementations
 
         this.container.bind<Configuration>(Types.Configuration)
-            .toConstantValue(new Configuration(this.configuration["config"]));
+            .toConstantValue(this.configuration);
 
-        this.container.bind<Anecdote>(Types.Anecdote)
-            .to(Anecdote);
+        this.container.bind<Service>(Types.Anecdote)
+            .to(Service);
 
         this.bindRepository();
         this.bindSources();

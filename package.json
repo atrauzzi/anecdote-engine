@@ -1,7 +1,7 @@
 {
   "name": "anecdote-engine",
   "version": "0.0.0-development",
-  "main": "lib/index.js",
+  "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "license": "Apache-2.0",
   "bin": {

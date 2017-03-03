@@ -1,7 +1,19 @@
+import {Target} from "./Target";
+import {Queue} from "./Queue";
+import {Source} from "./Source";
+import {Repository} from "./Repository";
 
 
-export class Configuration {
+export interface Configuration {
 
-    public constructor(public values: {[key: string]: any}) {
-    }
+
+    repository: Repository;
+
+    sources: Source[];
+
+    queues: Queue[];
+
+    targets: Target[];
+
+    values: any;
 }

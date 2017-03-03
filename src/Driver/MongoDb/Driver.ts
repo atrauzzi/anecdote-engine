@@ -1,7 +1,7 @@
+import {MongoClient, Db} from "mongodb";
 import {Driver as AnecdoteDriver} from "../../Engine/Driver";
 import {Service as Bus} from "../../Bus/Service";
-import {Configuration} from "../../Engine/Configuration";
-import {MongoClient, Db} from "mongodb";
+import {Configuration} from "./Configuration";
 
 
 export abstract class Driver implements AnecdoteDriver {
@@ -12,9 +12,9 @@ export abstract class Driver implements AnecdoteDriver {
 
     protected db: Db;
 
-    public constructor(options: Configuration, bus: Bus) {
+    public constructor(configuration: Configuration, bus: Bus) {
 
-        this.serverUri = options.values["MONGODB_HOST"];
+        this.serverUri = configuration.values.MONGODB_HOST;
     }
 
     protected async connect() {

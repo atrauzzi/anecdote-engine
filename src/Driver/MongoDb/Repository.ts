@@ -13,7 +13,7 @@ export class Repository extends Driver implements RepositoryContract {
         super(options, bus);
     }
 
-    public async addAuthor(author: Author): Promise<void> {
+    public async addAuthor(author: Author): Promise<any> {
 
         await this.connect();
 

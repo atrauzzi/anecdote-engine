@@ -1,4 +1,3 @@
-import {Anecdote} from "./Anecdote";
 
 
 export const Types = {

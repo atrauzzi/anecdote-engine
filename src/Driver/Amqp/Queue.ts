@@ -1,7 +1,7 @@
 import * as _ from "lodash";
 import protobuf from "../../Protobuf";
 import {Queue as QueueContract} from "../../Engine/Queue";
-import {Configuration} from "../../Engine/Configuration";
+import {Configuration} from "./Configuration";
 import {Service as Bus} from "../../Bus/Service";
 import {Author} from "../../Domain/Author";
 import * as amqp from "amqplib";
@@ -24,7 +24,7 @@ export class Queue implements QueueContract {
 
     public constructor(options: Configuration, bus: Bus) {
 
-        this.connectionString = options.values["AMQP_CONNECTION_STRING"];
+        this.connectionString = options.values.AMQP_CONNECTION_STRING;
         this.bus = bus;
     }
 

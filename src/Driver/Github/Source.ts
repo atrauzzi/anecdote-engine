@@ -4,7 +4,7 @@ import * as chance from "chance";
 import * as moment from "moment";
 import * as Client from "github";
 import {typeMap} from "../../Domain/PostType";
-import {Configuration} from "../../Engine/Configuration";
+import {Configuration} from "./Configuration";
 import {Service as Bus} from "../../Bus/Service";
 import {Source as SourceContract} from "../../Engine/Source";
 import {ScanSource} from "../../Engine/Job/ScanSource";

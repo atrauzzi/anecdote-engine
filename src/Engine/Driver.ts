@@ -1,4 +1,3 @@
-import {DriverStatic} from "./DriverStatic";
 
 
 export interface Driver {

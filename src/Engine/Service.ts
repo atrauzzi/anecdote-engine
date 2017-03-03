@@ -11,7 +11,7 @@ import {ScanSource} from "./Job/ScanSource";
 import {PostFound} from "./Job/PostFound";
 
 
-export class Anecdote {
+export class Service {
 
     public get drivers() {
 
@@ -30,13 +30,6 @@ export class Anecdote {
         protected targets: Target[],
         protected bus: Bus
     ) {
-
-        console.log("Using repository:", this.repository.name);
-        console.log("Using post sources:", this.sources.map((source) => source.name));
-        console.log("Using queues:", this.queues.map((queue) => queue.name));
-        console.log("Using post targets:", this.targets.map((target) => target.name));
-
-        console.log("Registring job handlers.");
         // ToDo: Probably could do a dynamic dispatch, by-convention.
         this.bus.subscribe<ScanSource, void>("source", "scan", (envelope) => this.handleSourceScan(envelope));
         this.bus.subscribe<PostFound, void>("post", "found", (envelope) => this.handleFoundPost(envelope));
