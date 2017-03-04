@@ -1,4 +1,4 @@
 #!/bin/bash
 
-./generate-protobuf-meta
-./tsc
+./bin/generate-protobuf-meta
+./bin/tsc
