@@ -14,6 +14,7 @@ cache:
 
 install:
   - touch .env
+  - chmod +x bin/*
   - docker-compose run --rm cli yarn install
 
 script:
