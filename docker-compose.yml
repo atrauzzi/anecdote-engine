@@ -21,6 +21,9 @@ services:
     build: .
     container_name: anecdote-cli
 
+    environment:
+      - TS_NODE_CACHE_DIRECTORY=./tscache
+
     depends_on:
       - mongodb
       - rabbitmq

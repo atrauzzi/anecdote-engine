@@ -88,7 +88,7 @@ export class ServiceProvider {
             const driver = this.bindDriver<Target>(target, "Queue");
 
             this.container.bind<Target>(Types.Target)
-                .to(this.bindDriver<Target>(driver, "Target"));
+                .to(driver);
         });
     }
 

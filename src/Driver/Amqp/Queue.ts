@@ -24,7 +24,7 @@ export class Queue implements QueueContract {
 
     public constructor(options: Configuration, bus: Bus) {
 
-        this.connectionString = options.values.AMQP_CONNECTION_STRING;
+        this.connectionString = options.AMQP_CONNECTION_STRING;
         this.bus = bus;
     }
 

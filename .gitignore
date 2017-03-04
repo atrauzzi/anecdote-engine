@@ -7,3 +7,4 @@ lib
 .env
 src/Protobuf.ts
 src/**/*.js
+tscache

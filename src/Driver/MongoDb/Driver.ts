@@ -14,7 +14,7 @@ export abstract class Driver implements AnecdoteDriver {
 
     public constructor(configuration: Configuration, bus: Bus) {
 
-        this.serverUri = configuration.values.MONGODB_HOST;
+        this.serverUri = configuration.MONGODB_HOST;
     }
 
     protected async connect() {
