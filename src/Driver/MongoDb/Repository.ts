@@ -3,7 +3,7 @@ import {Repository as RepositoryContract} from "../../Engine/Repository";
 import {Service as Bus} from "../../Bus/Service";
 import {Author} from "../../Domain/Author";
 import {ScanSource} from "../../Engine/Job/ScanSource";
-import {Configuration} from "../../Engine/Configuration";
+import {Configuration} from "./Configuration";
 
 
 export class Repository extends Driver implements RepositoryContract {

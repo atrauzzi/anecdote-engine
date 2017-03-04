@@ -18,6 +18,7 @@ export class ServiceProvider {
         protected container: inversify.Container,
         protected configuration: Configuration
     ) {
+
     }
 
     public bindAll() {
@@ -58,30 +59,36 @@ export class ServiceProvider {
 
     public bindSources() {
 
-        this.configuration["sources"].map((source: string) => {
+        _.forEach(this.configuration.sources, (source) => {
 
-            inversify.decorate(inversify.inject(Types.Marked), source, 2);
+            const driver = this.bindDriver<Source>(source, "Source");
+
+            inversify.decorate(inversify.inject(Types.Marked), driver, 2);
 
             this.container.bind<Source>(Types.Source)
-                .to(this.bindDriver<Source>(source, "Source"));
+                .to(driver);
         });
     }
 
     public bindQueues() {
 
-        this.configuration["queues"].map((queue: string) => {
+        _.forEach(this.configuration.queues, (queue) => {
+
+            const driver = this.bindDriver<Queue>(queue, "Queue");
 
             this.container.bind<Queue>(Types.Queue)
-                .to(this.bindDriver<Queue>(queue, "Queue"));
+                .to(driver);
         });
     }
 
     public bindTargets() {
 
-        this.configuration["targets"].map((target: string) => {
+        _.forEach(this.configuration.targets, (target) => {
+
+            const driver = this.bindDriver<Target>(target, "Queue");
 
             this.container.bind<Target>(Types.Target)
-                .to(this.bindDriver<Target>(target, "Target"));
+                .to(this.bindDriver<Target>(driver, "Target"));
         });
     }
 

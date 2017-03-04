@@ -1,18 +1,15 @@
 #!/usr/bin/env node
-import {ServiceProvider} from "../ServiceProvider";
-import {container} from "../Container";
-import {command} from "./Base";
-import {Service} from "../Engine/Service";
-import {Types} from "../Engine/index";
+import {Configuration} from "../Engine/Configuration";
+import {build as buildCommand} from "./";
+import {build as buildAnecdote} from "../";
 
 
+const command = buildCommand<Configuration>();
 command.parse(process.argv);
 
-const configurationReader = new ServiceProvider(container, command);
-configurationReader.bindAll();
-
-const anecdote = container.get<Service>(Types.Anecdote);
+const anecdote = buildAnecdote(command);
 
 anecdote.setup()
     .then(() => anecdote.close())
-    .catch((error) => console.log(error));
+    .catch((error) => console.log(error))
+;

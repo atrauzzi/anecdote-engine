@@ -2,18 +2,18 @@ import {Target} from "./Target";
 import {Queue} from "./Queue";
 import {Source} from "./Source";
 import {Repository} from "./Repository";
+import {DriverStatic} from "./DriverStatic";
 
 
 export interface Configuration {
 
+    repository: DriverStatic<Repository> | string;
 
-    repository: Repository;
+    sources: DriverStatic<Source>[] | string[];
 
-    sources: Source[];
+    queues: DriverStatic<Queue>[] | string[];
 
-    queues: Queue[];
-
-    targets: Target[];
+    targets: DriverStatic<Target>[] | string[];
 
     values: any;
 }

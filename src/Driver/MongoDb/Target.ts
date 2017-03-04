@@ -2,7 +2,7 @@ import {Driver} from "./Driver";
 import {Target as TargetContract} from "../../Engine/Target";
 import {Service as Bus} from "../../Bus/Service";
 import {Post} from "../../Domain/Post";
-import {Configuration} from "../../Engine/Configuration";
+import {Configuration} from "./Configuration";
 
 
 export class Target extends Driver implements TargetContract {
