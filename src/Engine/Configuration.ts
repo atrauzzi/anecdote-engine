@@ -14,6 +14,4 @@ export interface Configuration {
     queues: DriverStatic<Queue>[] | string[];
 
     targets: DriverStatic<Target>[] | string[];
-
-    values: any;
 }

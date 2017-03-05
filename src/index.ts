@@ -9,7 +9,9 @@ import {Queue} from "./Driver/Amqp/Queue";
 import {Target} from "./Driver/MongoDb/Target";
 
 
-export function build<DriverConfigurations>(configuration: Configuration & DriverConfigurations) {
+export function build<DriverConfigurations>(configuration?: Configuration & DriverConfigurations) {
+
+    configuration = configuration || {} as Configuration & DriverConfigurations;
 
     // Note: Any of these values that are missing will be replaced with these defaults.
     configuration.repository = configuration.repository || MongoDbRepository;
