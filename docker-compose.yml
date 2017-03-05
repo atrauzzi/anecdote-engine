@@ -19,7 +19,7 @@ services:
 
   cli:
     build: .
-    container_name: anecdote-cli
+    container_name: anecdote-engine-cli
 
     environment:
       - TS_NODE_CACHE_DIRECTORY=./tscache
