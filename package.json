@@ -4,13 +4,6 @@
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "license": "Apache-2.0",
-  "bin": {
-    "anecdote": "./lib/anecdote.js",
-    "anecdote-run": "./lib/anecdote-run.js",
-    "anecdote-setup": "./lib/anecdote-setup.js",
-    "anecdote-add-author": "./lib/anecdote-add-author.js",
-    "anecdote-scan": "./lib/anecdote-scan.js"
-  },
   "scripts": {
     "start": "node ./node_modules/ts-node/dist/bin.js src/Command/anecdote",
     "setup": "node ./node_modules/ts-node/dist/bin.js src/Command/anecdote-setup",
