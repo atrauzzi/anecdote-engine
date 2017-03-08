@@ -6,6 +6,8 @@ export interface Driver {
 
     setup(): Promise<void>;
 
+    connect(): Promise<void>;
+
     close(): Promise<void>;
 
     working?(): boolean;

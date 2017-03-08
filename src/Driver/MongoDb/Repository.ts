@@ -15,18 +15,14 @@ export class Repository extends Driver implements RepositoryContract {
 
     public async addAuthor(author: Author): Promise<any> {
 
-        await this.connect();
-
-        await this.db.collection("author")
+        await this.collection("author")
             // ToDo: Need to open a ticket on the mongodb JIRA about this - https://jira.mongodb.org/browse/NODE
             .insertOne(JSON.parse(JSON.stringify(author)));
     }
 
     public async authors() {
 
-        await this.connect();
-
-        return await this.db.collection("author")
+        return await this.collection("author")
             .find<Author>()
             .toArray();
     }

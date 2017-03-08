@@ -40,6 +40,11 @@ export class Service {
         await Promise.all(this.drivers.map((driver) => driver.setup()));
     }
 
+    public async connect() {
+
+        await Promise.all(this.drivers.map((driver) => driver.connect()))
+    }
+
     public async close() {
 
         await Promise.all(this.drivers.map((driver) => driver.close()));
@@ -51,6 +56,8 @@ export class Service {
     }
 
     public async scanSources() {
+
+        await this.connect();
 
         const authors = await this.repository.authors();
 

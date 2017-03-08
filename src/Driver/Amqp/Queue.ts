@@ -16,7 +16,7 @@ export class Queue implements QueueContract {
 
     protected connection: amqp.Connection;
 
-    protected channel: amqp.Channel;
+    protected channel: amqp.ConfirmChannel;
 
     protected bus: Bus;
 
@@ -28,13 +28,13 @@ export class Queue implements QueueContract {
         this.bus = bus;
     }
 
-    protected async connect() {
+    public async connect() {
 
         if(!this.connection) {
 
             this.connection = await amqp.connect(this.connectionString);
 
-            const channel = await this.connection.createChannel();
+            const channel = await this.connection.createConfirmChannel();
             await channel.assertQueue("scan:sources");
 
             this.channel = channel;
@@ -54,11 +54,8 @@ export class Queue implements QueueContract {
 
     public async dispatchSourceScans(author: Author) {
 
-        await this.connect();
-
         _.forEach(author.sources, (source, name) =>
             this.channel.sendToQueue("scan:sources", this.toJsonBuffer(<ScanSource>{
-
                 authorId: author.id,
                 sourceName: name,
                 data: this.encodeJson("Source", source)
@@ -72,8 +69,6 @@ export class Queue implements QueueContract {
     }
 
     public async work() {
-
-        await this.connect();
 
         this.workSources();
     }
@@ -111,7 +106,6 @@ export class Queue implements QueueContract {
 
     public async setup(): Promise<void> {
 
-        await this.connect();
         console.log("Successfully connected to AMQP server!");
     }
 

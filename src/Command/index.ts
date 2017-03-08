@@ -1,6 +1,6 @@
+import {manifest, environment} from "../App";
 import * as _ from "lodash";
 import * as commander from "commander";
-import {manifest, environment} from "../App";
 import {ICommand} from "commander";
 import {split, collect} from "./Coercers";
 

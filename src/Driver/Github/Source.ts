@@ -38,6 +38,11 @@ export class Source implements SourceContract {
         return null;
     }
 
+    public async connect() {
+
+        return null;
+    }
+
     public async close() {
 
         return null;

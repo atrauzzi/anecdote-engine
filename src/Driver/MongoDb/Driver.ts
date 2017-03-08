@@ -1,4 +1,4 @@
-import {MongoClient, Db} from "mongodb";
+import {MongoClient, Db, Collection} from "mongodb";
 import {Driver as AnecdoteDriver} from "../../Engine/Driver";
 import {Service as Bus} from "../../Bus/Service";
 import {Configuration} from "./Configuration";
@@ -10,14 +10,14 @@ export abstract class Driver implements AnecdoteDriver {
 
     protected serverUri: string;
 
-    protected db: Db;
+    private db: Db;
 
     public constructor(configuration: Configuration, bus: Bus) {
 
         this.serverUri = configuration.MONGODB_HOST;
     }
 
-    protected async connect() {
+    public async connect() {
 
         if(!this.db) {
 
@@ -32,6 +32,12 @@ export abstract class Driver implements AnecdoteDriver {
 
         await this.db.collection(collection)
             .insertOne(data);
+
+    }
+
+    protected collection(name: string): Collection {
+
+        return this.db.collection(name);
     }
 
     public async close() {
@@ -45,7 +51,6 @@ export abstract class Driver implements AnecdoteDriver {
 
     public async setup(): Promise<void> {
 
-        await this.connect();
         console.log("Successfully connected to MongoDB!");
     }
 }

@@ -14,8 +14,6 @@ export class Target extends Driver implements TargetContract {
 
     public async savePost(post: Post) {
 
-        await this.connect();
-
         await this.save("post", post);
     }
 }
