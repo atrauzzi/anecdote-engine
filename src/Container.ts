@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import {Container, decorate, injectable} from "inversify";
 import {Types} from "./Engine/index";
 import {Service as Bus} from "./Bus/Service";
