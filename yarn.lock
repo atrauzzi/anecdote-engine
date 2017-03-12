@@ -86,12 +86,12 @@
   resolved "https://registry.yarnpkg.com/@types/azure-sb/-/azure-sb-0.0.29.tgz#4a0baf8616b65651893b3c55a7df901ad171881f"
 
 "@types/bluebird@*":
-  version "3.0.37"
-  resolved "https://registry.yarnpkg.com/@types/bluebird/-/bluebird-3.0.37.tgz#2e76b394aa9bea40d04241a31c0887a260283388"
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/@types/bluebird/-/bluebird-3.5.0.tgz#2633470a4eabe9a47cd9a45fdb20ed5f93407bca"
 
 "@types/chance@^0.7.31":
-  version "0.7.31"
-  resolved "https://registry.yarnpkg.com/@types/chance/-/chance-0.7.31.tgz#8dcd812456a261bb4d832243b85ebc5c68e28c80"
+  version "0.7.32"
+  resolved "https://registry.yarnpkg.com/@types/chance/-/chance-0.7.32.tgz#0de025dd9bb52b3ea7b5192f4cfeaf235343bf17"
 
 "@types/commander@^2.3.31":
   version "2.3.31"
@@ -114,8 +114,8 @@
   resolved "https://registry.yarnpkg.com/@types/highlight.js/-/highlight.js-9.1.9.tgz#ed6336955eaf233b75eb7923b9b1f373d045ef01"
 
 "@types/lodash@^4.14.50":
-  version "4.14.54"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.54.tgz#287dbbcd97d5da69c25ca99fb5afa81c4839b7fa"
+  version "4.14.55"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.55.tgz#75d7d4eba020ee4103d4cbd0f2a3ef5db8f7534f"
 
 "@types/long@^3.0.31":
   version "3.0.31"
@@ -137,7 +137,11 @@
   dependencies:
     "@types/node" "*"
 
-"@types/node@*", "@types/node@7.0.5", "@types/node@^7.0.4":
+"@types/node@*", "@types/node@^7.0.4":
+  version "7.0.8"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.8.tgz#25e4dd804b630c916ae671233e6d71f6ce18124a"
+
+"@types/node@7.0.5":
   version "7.0.5"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.5.tgz#96a0f0a618b7b606f1ec547403c00650210bfbb7"
 
@@ -153,8 +157,8 @@ agent-base@2:
     semver "~5.0.1"
 
 ajv@^4.9.1:
-  version "4.11.4"
-  resolved "https://registry.yarnpkg.com/ajv/-/ajv-4.11.4.tgz#ebf3a55d4b132ea60ff5847ae85d2ef069960b45"
+  version "4.11.5"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-4.11.5.tgz#b6ee74657b993a01dce44b7944d56f485828d5bd"
   dependencies:
     co "^4.6.0"
     json-stable-stringify "^1.0.1"
@@ -532,8 +536,8 @@ dateformat@^1.0.11:
     meow "^3.3.0"
 
 debug@2, debug@^2.2.0:
-  version "2.6.1"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.1.tgz#79855090ba2c4e3115cc7d8769491d58f0491351"
+  version "2.6.2"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.2.tgz#dfa96a861ee9b8c2f29349b3bcc41aa599a71e0f"
   dependencies:
     ms "0.7.2"
 
@@ -692,8 +696,8 @@ form-data@~2.1.1:
     mime-types "^2.1.12"
 
 from@~0:
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/from/-/from-0.1.3.tgz#ef63ac2062ac32acf7862e0d40b44b896f22f3bc"
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/from/-/from-0.1.7.tgz#83c60afc58b9c56997007ed1a768b3ab303a44fe"
 
 fs.realpath@^1.0.0:
   version "1.0.0"
@@ -778,8 +782,8 @@ github@^8.0.0:
     netrc "^0.1.4"
 
 github@^9.0.0:
-  version "9.1.0"
-  resolved "https://registry.yarnpkg.com/github/-/github-9.1.0.tgz#bc3f29b5df6680ad90e9ca2bcf93cf1f78e7b9ef"
+  version "9.2.0"
+  resolved "https://registry.yarnpkg.com/github/-/github-9.2.0.tgz#8a886dc40dd63636707dcaf99df3df26c59f16fc"
   dependencies:
     follow-redirects "0.0.7"
     https-proxy-agent "^1.0.0"
@@ -848,7 +852,7 @@ har-validator@~2.0.6:
     is-my-json-valid "^2.12.4"
     pinkie-promise "^2.0.0"
 
-har-validator@~4.2.0:
+har-validator@~4.2.1:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/har-validator/-/har-validator-4.2.1.tgz#33481d0f1bbff600dd203d75812a6a5fba002e2a"
   dependencies:
@@ -875,8 +879,8 @@ hawk@~3.1.3:
     sntp "1.x.x"
 
 highlight.js@^9.9.0:
-  version "9.9.0"
-  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.9.0.tgz#b9995dcfdc2773e307a34f0460d92b9a474782c0"
+  version "9.10.0"
+  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.10.0.tgz#f9f0b14c0be00f0e4fb1e577b749fed9e6f52f55"
 
 hoek@2.x.x:
   version "2.16.3"
@@ -1188,8 +1192,8 @@ lru-cache@^4.0.0:
     yallist "^2.0.0"
 
 make-error@^1.1.1:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/make-error/-/make-error-1.2.2.tgz#e4e270e474f642cca20fa126fe441163957832ef"
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/make-error/-/make-error-1.2.3.tgz#6c4402df732e0977ac6faf754a5074b3d2b1d19d"
 
 map-obj@^1.0.0, map-obj@^1.0.1:
   version "1.0.1"
@@ -1546,9 +1550,9 @@ qs@~6.2.0:
   version "6.2.3"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.2.3.tgz#1cfcb25c10a9b2b483053ff39f5dfc9233908cfe"
 
-qs@~6.3.0:
-  version "6.3.2"
-  resolved "https://registry.yarnpkg.com/qs/-/qs-6.3.2.tgz#e75bd5f6e268122a2a0e0bda630b2550c166502c"
+qs@~6.4.0:
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.4.0.tgz#13e26d28ad6b0ffaa91312cd3bf708ed351e7233"
 
 rc@^1.0.1, rc@^1.1.6:
   version "1.1.7"
@@ -1666,8 +1670,8 @@ request-promise@^4.1.1:
     stealthy-require "^1.0.0"
 
 request@^2.74.0, request@^2.78.0:
-  version "2.80.0"
-  resolved "https://registry.yarnpkg.com/request/-/request-2.80.0.tgz#8cc162d76d79381cdefdd3505d76b80b60589bd0"
+  version "2.81.0"
+  resolved "https://registry.yarnpkg.com/request/-/request-2.81.0.tgz#c6928946a0e06c5f8d6f8a9333469ffda46298a0"
   dependencies:
     aws-sign2 "~0.6.0"
     aws4 "^1.2.1"
@@ -1676,7 +1680,7 @@ request@^2.74.0, request@^2.78.0:
     extend "~3.0.0"
     forever-agent "~0.6.1"
     form-data "~2.1.1"
-    har-validator "~4.2.0"
+    har-validator "~4.2.1"
     hawk "~3.1.3"
     http-signature "~1.1.0"
     is-typedarray "~1.0.0"
@@ -1685,10 +1689,11 @@ request@^2.74.0, request@^2.78.0:
     mime-types "~2.1.7"
     oauth-sign "~0.8.1"
     performance-now "^0.2.0"
-    qs "~6.3.0"
+    qs "~6.4.0"
+    safe-buffer "^5.0.1"
     stringstream "~0.0.4"
     tough-cookie "~2.3.0"
-    tunnel-agent "~0.4.1"
+    tunnel-agent "^0.6.0"
     uuid "^3.0.0"
 
 request@~2.74.0:
@@ -2022,6 +2027,12 @@ tsutils@^1.1.0:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/tsutils/-/tsutils-1.2.2.tgz#7e165c601367b9f89200b97ff47d9e38d1a6e4c8"
 
+tunnel-agent@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/tunnel-agent/-/tunnel-agent-0.6.0.tgz#27a5dea06b36b04a0a9966774b290868f0fc40fd"
+  dependencies:
+    safe-buffer "^5.0.1"
+
 tunnel-agent@~0.4.1:
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/tunnel-agent/-/tunnel-agent-0.4.3.tgz#6373db76909fe570e08d73583365ed828a74eeeb"
@@ -2185,8 +2196,8 @@ xtend@^4.0.0:
   resolved "https://registry.yarnpkg.com/xtend/-/xtend-4.0.1.tgz#a5c6d532be656e23db820efb943a1f04998d63af"
 
 yallist@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/yallist/-/yallist-2.0.0.tgz#306c543835f09ee1a4cb23b7bce9ab341c91cdd4"
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/yallist/-/yallist-2.0.1.tgz#6c11279640abd6ed0a86dd32ed56b03caa9df4f1"
 
 yn@^1.2.0:
   version "1.2.0"
