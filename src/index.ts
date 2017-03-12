@@ -13,7 +13,7 @@ export function build<DriverConfigurations>(configuration?: Configuration & Driv
 
     configuration = configuration || {} as Configuration & DriverConfigurations;
 
-    // Note: Any of these values that are missing will be replaced with these defaults.
+    // Note: Any of these values that are missing will be replaced with the following defaults.
     configuration.repository = configuration.repository || MongoDbRepository;
     configuration.sources = configuration.sources || [
         GithubSource,

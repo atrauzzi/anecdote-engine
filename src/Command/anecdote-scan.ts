@@ -12,10 +12,6 @@ const anecdote = buildAnecdote(command);
 
 anecdote.scanSources()
     .then(() => anecdote.close())
-    // .then(() => {
-    //
-    //     setInterval(wtfnode.dump, 5000);
-    // })
     .catch((error) => console.error(error))
 ;
 

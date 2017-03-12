@@ -52,6 +52,8 @@ export class Service {
 
     public async addAuthor(author: Domain.Author) {
 
+        await this.connect();
+
         await this.repository.addAuthor(author);
     }
 

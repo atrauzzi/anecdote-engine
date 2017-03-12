@@ -8,13 +8,13 @@ export abstract class Driver implements AnecdoteDriver {
 
     public name = "mongodb";
 
-    protected serverUri: string;
+    protected connectionString: string;
 
     private db: Db;
 
     public constructor(configuration: Configuration, bus: Bus) {
 
-        this.serverUri = configuration.MONGODB_HOST;
+        this.connectionString = configuration.MONGODB_CONNECTION_STRING;
     }
 
     public async connect() {
@@ -22,7 +22,7 @@ export abstract class Driver implements AnecdoteDriver {
         if(!this.db) {
 
             //noinspection TypeScriptUnresolvedFunction
-            this.db = await MongoClient.connect(this.serverUri);
+            this.db = await MongoClient.connect(this.connectionString);
         }
     }
 

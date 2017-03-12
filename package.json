@@ -27,6 +27,7 @@
   "homepage": "https://github.com/atrauzzi/anecdote-engine#readme",
   "devDependencies": {
     "@types/amqplib": "^0.5.1",
+    "@types/azure-sb": "^0.0.29",
     "@types/chance": "^0.7.31",
     "@types/commander": "^2.3.31",
     "@types/dotenv": "^2.0.20",
@@ -44,6 +45,7 @@
   },
   "dependencies": {
     "amqplib": "^0.5.1",
+    "azure-sb": "^0.10.4",
     "chance": "^1.0.4",
     "commander": "^2.9.0",
     "dotenv": "^4.0.0",

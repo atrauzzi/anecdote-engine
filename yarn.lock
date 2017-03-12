@@ -81,6 +81,10 @@
     "@types/bluebird" "*"
     "@types/node" "*"
 
+"@types/azure-sb@^0.0.29":
+  version "0.0.29"
+  resolved "https://registry.yarnpkg.com/@types/azure-sb/-/azure-sb-0.0.29.tgz#4a0baf8616b65651893b3c55a7df901ad171881f"
+
 "@types/bluebird@*":
   version "3.0.37"
   resolved "https://registry.yarnpkg.com/@types/bluebird/-/bluebird-3.0.37.tgz#2e76b394aa9bea40d04241a31c0887a260283388"
@@ -245,6 +249,30 @@ aws-sign2@~0.6.0:
 aws4@^1.2.1:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.6.0.tgz#83ef5ca860b2b32e4a0deedee8c771b9db57471e"
+
+azure-common@^0.9.14:
+  version "0.9.18"
+  resolved "https://registry.yarnpkg.com/azure-common/-/azure-common-0.9.18.tgz#38b960f4ddadd44d34f52e8b85d5d1e0226440fd"
+  dependencies:
+    dateformat "1.0.2-1.2.3"
+    duplexer "~0.1.1"
+    envconf "~0.0.4"
+    request "~2.74.0"
+    through "~2.3.4"
+    tunnel "~0.0.2"
+    underscore "1.4.x"
+    validator "~3.22.2"
+    xml2js "0.2.7"
+    xmlbuilder "0.4.3"
+
+azure-sb@^0.10.4:
+  version "0.10.4"
+  resolved "https://registry.yarnpkg.com/azure-sb/-/azure-sb-0.10.4.tgz#e7ad0698bb68d38817148253a246291357b8d51d"
+  dependencies:
+    azure-common "^0.9.14"
+    mpns "~2.0.0"
+    underscore "1.4.x"
+    wns "~0.5.3"
 
 babel-code-frame@^6.20.0:
   version "6.22.0"
@@ -492,6 +520,10 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
+dateformat@1.0.2-1.2.3:
+  version "1.0.2-1.2.3"
+  resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-1.0.2-1.2.3.tgz#b0220c02de98617433b72851cf47de3df2cdbee9"
+
 dateformat@^1.0.11:
   version "1.0.12"
   resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-1.0.12.tgz#9f124b67594c937ff706932e4a642cca8dbbfee9"
@@ -561,6 +593,10 @@ encoding@^0.1.11:
   resolved "https://registry.yarnpkg.com/encoding/-/encoding-0.1.12.tgz#538b66f3ee62cd1ab51ec323829d1f9480c74beb"
   dependencies:
     iconv-lite "~0.4.13"
+
+envconf@~0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/envconf/-/envconf-0.0.4.tgz#85675afba237c43f98de2d46adc0e532a4dcf48b"
 
 error-ex@^1.2.0:
   version "1.3.1"
@@ -1235,6 +1271,10 @@ mongodb@^2.2.22:
     mongodb-core "2.1.8"
     readable-stream "2.1.5"
 
+mpns@~2.0.0:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/mpns/-/mpns-2.0.1.tgz#24d269faed8f39726ed31e6250653d043fd44e16"
+
 ms@0.7.2:
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.2.tgz#ae25cf2512b3885a1d95d7f037868d8431124765"
@@ -1716,6 +1756,10 @@ safe-buffer@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.0.1.tgz#d263ca54696cd8a306b5ca6551e92de57918fbe7"
 
+sax@0.5.2:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/sax/-/sax-0.5.2.tgz#735ffaa39a1cff8ffb9598f0223abdb03a9fb2ea"
+
 semantic-release@^6.3.2:
   version "6.3.6"
   resolved "https://registry.yarnpkg.com/semantic-release/-/semantic-release-6.3.6.tgz#629d0aec90b38a2957a57a4a9ee1214af51928c7"
@@ -1897,7 +1941,7 @@ term-size@^0.1.0:
   dependencies:
     execa "^0.4.0"
 
-through@2, through@~2.3, through@~2.3.1:
+through@2, through@~2.3, through@~2.3.1, through@~2.3.4:
   version "2.3.8"
   resolved "https://registry.yarnpkg.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
 
@@ -1982,6 +2026,10 @@ tunnel-agent@~0.4.1:
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/tunnel-agent/-/tunnel-agent-0.4.3.tgz#6373db76909fe570e08d73583365ed828a74eeeb"
 
+tunnel@~0.0.2:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/tunnel/-/tunnel-0.0.4.tgz#2d3785a158c174c9a16dc2c046ec5fc5f1742213"
+
 tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"
   resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"
@@ -2001,6 +2049,10 @@ uid-number@0.0.5:
 underscore.string@~2.2.0rc:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/underscore.string/-/underscore.string-2.2.1.tgz#d7c0fa2af5d5a1a67f4253daee98132e733f0f19"
+
+underscore@1.4.x:
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.4.4.tgz#61a6a32010622afa07963bf325203cf12239d604"
 
 unique-string@^1.0.0:
   version "1.0.0"
@@ -2056,6 +2108,10 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "~1.0.0"
     spdx-expression-parse "~1.0.0"
 
+validator@~3.22.2:
+  version "3.22.2"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-3.22.2.tgz#6f297ae67f7f82acc76d0afdb49f18d9a09c18c0"
+
 verror@1.3.6:
   version "1.3.6"
   resolved "https://registry.yarnpkg.com/verror/-/verror-1.3.6.tgz#cff5df12946d297d2baaefaa2689e25be01c005c"
@@ -2086,6 +2142,10 @@ widest-line@^1.0.0:
   dependencies:
     string-width "^1.0.1"
 
+wns@~0.5.3:
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/wns/-/wns-0.5.3.tgz#00f4e85cfcf8e3383dcbd81898906f1f6ad4845f"
+
 wordwrap@~0.0.2:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/wordwrap/-/wordwrap-0.0.3.tgz#a3d5da6cd5c0bc0008d37234bbaf1bed63059107"
@@ -2109,6 +2169,16 @@ wtfnode@^0.5.0:
 xdg-basedir@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/xdg-basedir/-/xdg-basedir-3.0.0.tgz#496b2cc109eca8dbacfe2dc72b603c17c5870ad4"
+
+xml2js@0.2.7:
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/xml2js/-/xml2js-0.2.7.tgz#1838518bb01741cae0878bab4915e494c32306af"
+  dependencies:
+    sax "0.5.2"
+
+xmlbuilder@0.4.3:
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/xmlbuilder/-/xmlbuilder-0.4.3.tgz#c4614ba74e0ad196e609c9272cd9e1ddb28a8a58"
 
 xtend@^4.0.0:
   version "4.0.1"
