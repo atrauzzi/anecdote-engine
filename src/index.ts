@@ -42,5 +42,8 @@ export {Target as MongoDbTarget} from "./Driver/MongoDb/Target";
 export {Configuration as AmqpConfiguration} from "./Driver/Amqp/Configuration";
 export {Queue as AmqpQueue} from "./Driver/Amqp/Queue";
 
+export {Configuration as AzureConfiguration} from "./Driver/Azure/Configuration";
+export {Queue as AzureServiceBusQueue} from "./Driver/Azure/ServiceBusQueue";
+
 export {Configuration as GithubConfiguration} from "./Driver/Github/Configuration";
 export {Source as GithubSource} from "./Driver/Github/Source";
