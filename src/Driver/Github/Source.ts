@@ -85,17 +85,17 @@ export class Source implements SourceContract {
             const contentMarkdown = await contentResponse.text();
             const contentHtml = this.marked(contentMarkdown);
 
-            const post = new Post();
-
-            post.id = chance().guid();
-            post.source = this.name;
-            post.nativeId = gist.owner.id;
-            post.authored = moment.utc(gist.created_at).toDate();
-            post.contentHtml = contentHtml;
-            post.title = _.replace(gist.description, typeMap.blog, "").trim();
-            post.uri = gist.url;
-            post.type = typeMap.blog;
-            post.authorId = authorId;
+            const post = <Post> {
+                id: chance().guid(),
+                source: this.name,
+                nativeId: gist.owner.id,
+                authored: moment.utc(gist.created_at).toDate(),
+                contentHtml: contentHtml,
+                title: _.replace(gist.description, typeMap.blog, "").trim(),
+                uri: gist.url,
+                type: typeMap.blog,
+                authorId: authorId,
+        };
 
             await this.bus.dispatch("post", "found", {
                 post: post,

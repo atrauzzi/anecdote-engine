@@ -1,15 +1,15 @@
 import {Source} from "./Source";
 
 
-export class Author {
+export interface Author {
 
-    public id: string;
+    id: string;
 
-    public firstName: string;
+    firstName: string;
 
-    public lastName: string;
+    lastName: string;
 
-    public sources: {[key: string]: Source} = {};
+    sources: {[index: string]: Source};
 
-    public created: Date;
+    created: Date;
 }

@@ -1,24 +1,23 @@
-import {Author} from "./Author";
 import {PostType} from "./PostType";
 
 
-export class Post {
+export interface Post {
 
-    public id: string;
+    id: string;
 
-    public authorId: string;
+    authorId: string;
 
-    public title: string;
+    title: string;
 
-    public contentHtml: string;
+    contentHtml: string;
 
-    public authored: Date;
+    authored: Date;
 
-    public type: PostType;
+    type: PostType;
 
-    public uri: string;
+    uri: string;
 
-    public nativeId: string;
+    nativeId: string;
 
-    public source: string;
+    source: string;
 }

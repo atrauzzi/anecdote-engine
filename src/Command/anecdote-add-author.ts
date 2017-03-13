@@ -29,20 +29,16 @@ command
 
 const anecdote = buildAnecdote(command);
 
-const author = new Author;
-author.id = Chance().guid();
-author.firstName = command.firstName;
-author.lastName = command.lastName;
-author.sources = _.mapValues(command.authorSources, (sourceData) => {
-
-    const source = new SourceModel;
-
-    source.nativeId = sourceData.nativeId;
-    source.username = sourceData.username;
-    source.token = sourceData.token;
-
-    return source;
-});
+const author = <Author> {
+    id: Chance().guid(),
+    firstName: command.firstName,
+    lastName: command.lastName,
+    sources: _.mapValues(command.authorSources, (sourceData) => <SourceModel> {
+        nativeId: sourceData.nativeId,
+        username: sourceData.username,
+        token: sourceData.token,
+    })
+};
 
 anecdote
     .addAuthor(author)

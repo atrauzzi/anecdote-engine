@@ -1,5 +1,4 @@
 import * as _ from "lodash";
-import protobuf from "../../Protobuf";
 import {Queue as QueueContract} from "../../Engine/Queue";
 import {Configuration} from "./Configuration";
 import {Service as Bus} from "../../Bus/Service";
@@ -58,7 +57,7 @@ export class Queue implements QueueContract {
             this.channel.sendToQueue("scan:sources", this.toJsonBuffer(<ScanSource>{
                 authorId: author.id,
                 sourceName: name,
-                data: this.encodeJson("Source", source)
+                data: this.toJsonBuffer(source)
             }))
         );
     }
@@ -112,12 +111,5 @@ export class Queue implements QueueContract {
     protected toJsonBuffer(data: any) {
 
         return new Buffer(JSON.stringify(data));
-    }
-
-    protected encodeJson(typeName: string, data: any): any {
-
-        const type = protobuf.lookupType(typeName);
-
-        return type.toObject(data);
     }
 }

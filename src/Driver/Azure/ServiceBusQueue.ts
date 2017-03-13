@@ -1,11 +1,11 @@
 import * as _ from "lodash";
-import protobuf from "../../Protobuf";
 import {Queue as QueueContract} from "../../Engine/Queue";
 import {Configuration} from "./Configuration";
 import {Service as Bus} from "../../Bus/Service";
 import Azure from "azure";
 import {Author} from "../../Domain/Author";
 import {ScanSource} from "../../Engine/Job/ScanSource";
+import {Source} from "../../Domain/Source";
 
 
 export class Queue implements QueueContract {
@@ -47,14 +47,14 @@ export class Queue implements QueueContract {
 
         const deferred = this.defer();
 
-        _.forEach(author.sources, (source, name) => {
+        _.forEach(author.sources, (source: Source, name) => {
 
             ++this.active;
 
             const message = <ScanSource> {
                 authorId: author.id,
                 sourceName: name,
-                data: this.encodeJson("Source", source)
+                data: source
             };
 
             this.connection.sendQueueMessage("scan:sources", message, (err: any) => {
@@ -131,12 +131,5 @@ export class Queue implements QueueContract {
             reject: reject,
             promise: promise
         };
-    }
-
-    protected encodeJson(typeName: string, data: any): any {
-
-        const type = protobuf.lookupType(typeName);
-
-        return type.toObject(data);
     }
 }

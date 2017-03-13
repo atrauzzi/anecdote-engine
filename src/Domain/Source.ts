@@ -1,10 +1,10 @@
 
 
-export class Source {
+export interface Source {
 
-    public nativeId: string;
+    nativeId: string;
 
-    public username: string;
+    username: string;
 
-    public token: string;
+    token: string;
 }

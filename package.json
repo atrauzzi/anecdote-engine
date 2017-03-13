@@ -10,10 +10,7 @@
     "add-author": "node ./node_modules/ts-node/dist/bin.js src/Command/anecdote-add-author",
     "scan": "node ./node_modules/ts-node/dist/bin.js src/Command/anecdote-scan",
     "work": "node ./node_modules/ts-node/dist/bin.js src/Command/anecdote-work",
-    "generate-protobuf-meta": "node ./node_modules/protobufjs/bin/pbjs -t json-module -w es6 -o src/Protobuf.ts data/*",
     "lint": "node ./node_modules/tslint/bin/tslint src/**/*.ts",
-    "pbjs": "node ./node_modules/protobufjs/bin/pbjs",
-    "pbts": "node ./node_modules/protobufjs/bin/pbts",
     "tsc": "node ./node_modules/typescript/bin/tsc --skipLibCheck",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
@@ -57,7 +54,6 @@
     "moment": "^2.17.1",
     "mongodb": "^2.2.22",
     "node-fetch": "^1.6.3",
-    "protobufjs": "^6.6.2",
     "reflect-metadata": "^0.1.9",
     "wtfnode": "^0.5.0"
   }
