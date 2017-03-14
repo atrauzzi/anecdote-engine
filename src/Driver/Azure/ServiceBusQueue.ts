@@ -2,7 +2,7 @@ import * as _ from "lodash";
 import {Queue as QueueContract} from "../../Engine/Queue";
 import {Configuration} from "./Configuration";
 import {Service as Bus} from "../../Bus/Service";
-import Azure from "azure";
+import * as Azure from "azure";
 import {Author} from "../../Domain/Author";
 import {ScanSource} from "../../Engine/Job/ScanSource";
 import {Source} from "../../Domain/Source";
