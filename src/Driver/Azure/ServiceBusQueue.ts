@@ -10,7 +10,7 @@ import {Source} from "../../Domain/Source";
 
 export class Queue implements QueueContract {
 
-    public name = "azure-service-bus-queue";
+    public name = "azure-servicebus-queue";
 
     protected connectionString: string;
 
