@@ -37,6 +37,8 @@ export class Service {
 
     public async setup() {
 
+        await this.connect();
+
         await Promise.all(this.drivers.map((driver) => driver.setup()));
     }
 

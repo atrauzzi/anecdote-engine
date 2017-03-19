@@ -5,6 +5,5 @@ lib
 .vscode
 .idea
 .env
-src/Protobuf.ts
 src/**/*.js
 tscache

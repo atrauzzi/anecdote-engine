@@ -21,9 +21,11 @@ export class Queue implements QueueContract {
 
     protected active = 0;
 
+    protected scanSourcesQueue = "scan-sources";
+
     public constructor(options: Configuration, bus: Bus) {
 
-        this.connectionString = options.SERVICE_BUS_CONNECTION_STRING;
+        this.connectionString = options.AZURE_SERVICEBUS_CONNECTION_STRING;
         this.bus = bus;
     }
 
@@ -57,7 +59,7 @@ export class Queue implements QueueContract {
                 data: source
             };
 
-            this.connection.sendQueueMessage("scan:sources", message, (err: any) => {
+            this.connection.sendQueueMessage(this.scanSourcesQueue, message, (err: any) => {
 
                 --this.active;
 
@@ -95,11 +97,13 @@ export class Queue implements QueueContract {
 
         const deferred = this.defer();
 
-        if(!this.connection) {
+        if(this.connection) {
 
             ++this.active;
 
-            this.connection.createQueueIfNotExists("scan:sources", (err: any) => {
+            console.log("Creating Service Bus Queues - Please note, if deploying to Azure, use the ARM template instead!");
+
+            this.connection.createQueueIfNotExists(this.scanSourcesQueue, (err: any) => {
 
                 --this.active;
 
@@ -108,6 +112,7 @@ export class Queue implements QueueContract {
                     return deferred.reject(err);
                 }
 
+                console.log("Service Bus Queues Created");
                 return deferred.resolve();
             });
         }
