@@ -63,7 +63,7 @@ export abstract class Repository implements RepositoryContract {
                 error ? reject(error) : resolve(entities)));
 
         return authors.map((author) =>
-            new JSON.parse(author["value"] as string));
+            JSON.parse(author["value"] as string));
     }
 
     public recordScan(job: ScanSource): void {
