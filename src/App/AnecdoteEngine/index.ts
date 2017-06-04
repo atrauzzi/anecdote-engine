@@ -1,6 +1,6 @@
 
 
-export const Types = {
+export const anecdoteSymbols = {
 
     Anecdote: Symbol("Anecdote"),
     Bus: Symbol("Bus"),
