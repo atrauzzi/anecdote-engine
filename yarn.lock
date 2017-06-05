@@ -1491,8 +1491,8 @@ proto-list@~1.2.1:
   resolved "https://registry.yarnpkg.com/proto-list/-/proto-list-1.2.4.tgz#212d5bfe1318306a420f6402b8e26ff39647a849"
 
 protoculture@^2.0.46:
-  version "2.0.48"
-  resolved "https://registry.yarnpkg.com/protoculture/-/protoculture-2.0.48.tgz#98b1738c199bfb89aa1b7e528d76c7e8f9a90a4d"
+  version "2.0.52"
+  resolved "https://registry.yarnpkg.com/protoculture/-/protoculture-2.0.52.tgz#d6fd6181d7d37cd273fa70987e1352406fce1071"
   dependencies:
     "@types/lodash" "^4.14.61"
     "@types/node" "^7.0.12"

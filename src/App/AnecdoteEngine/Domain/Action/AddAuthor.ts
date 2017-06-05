@@ -1,8 +1,10 @@
-import * as Redux from "redux";
+import { Action } from "redux";
 import { Author } from "../Author";
 
 
-export interface AddAuthor extends Redux.Action {
+export interface AddAuthor extends Action {
+
+    type: "add-author";
 
     author: Author;
 }
